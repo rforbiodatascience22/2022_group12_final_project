@@ -23,3 +23,12 @@ colnames(entries_raw) <- read.table(file = 'data/_raw/entries.idx',header = F,nr
 
 source_raw <- wrangle_source(source_raw = source_raw)
 
+
+
+# Write data --------------------------------------------------------------
+write_tsv(x = entries_raw,
+          file = "data/01_entries.tsv")
+write_tsv(x = pdb_entry_type_raw,
+          file = "data/01_pdb_entry_type.tsv")
+write_tsv(x = source_raw,
+          file = "data/01_source.tsv")
