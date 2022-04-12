@@ -17,12 +17,14 @@ entries_raw <- read_tsv(file = "data/_raw/entries.idx", skip = 2, col_names = FA
 pdb_entry_type_raw <- read_tsv(file = "data/_raw/pdb_entry_type.txt")
 source_raw <- read_tsv(file = "data/_raw/source.idx")
 
-# Loading column names into vector
-entries_header <- colnames(entries)
+
 
 # Wrangle data ------------------------------------------------------------
 # TODO:
 # - 
+# Loading column names into vector
+entries_header <- read.table(file = 'data/_raw/entries.idx',header = F,nrows = 1, sep = ',')[1,]
+colnames(entries_raw) <- entries_header
 my_data <- my_data_raw # %>% ...
 
 
