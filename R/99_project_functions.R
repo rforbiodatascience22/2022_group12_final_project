@@ -1,5 +1,6 @@
 # Define project functions ------------------------------------------------
 wrangle_source <- function(source_raw){
+  #' correctly splits up source data
   rows <- source_raw$X1
   IDCODE <- c()
   SOURCE <- c()
