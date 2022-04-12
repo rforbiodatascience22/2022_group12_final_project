@@ -13,11 +13,13 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-entries_raw <- read_tsv(file = "data/_raw/entries.idx")
+entries_raw <- read_tsv(file = "data/_raw/entries.idx", skip = 2, col_names = FALSE)
 pdb_entry_type_raw <- read_tsv(file = "data/_raw/pdb_entry_type.txt")
 source_raw <- read_tsv(file = "data/_raw/source.idx")
 
 # Wrangle data ------------------------------------------------------------
+# TODO:
+# - 
 my_data <- my_data_raw # %>% ...
 
 
