@@ -22,8 +22,7 @@ source_raw <- read_tsv(file = "data/_raw/source.idx", skip = 4, col_names = FALS
 # Wrangle data ------------------------------------------------------------
 
 # Loading column names into vector
-entries_header <- read.table(file = 'data/_raw/entries.idx',header = F,nrows = 1, sep = ',')[1,]
-colnames(entries_raw) <- entries_header
+colnames(entries_raw) <- read.table(file = 'data/_raw/entries.idx',header = F,nrows = 1, sep = ',')[1,]
 
 # split source into columns
 
