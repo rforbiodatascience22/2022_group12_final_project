@@ -12,7 +12,7 @@ wrangle_source <- function(source_raw){
                            first = 5) %>%
       str_replace_all("\t", "")
   }
-  df <- data.frame(IDCODE  = IDCODE,
+  df <- data.frame(IDCODE = IDCODE,
                    SOURCE = SOURCE)
   return(df)
 }
