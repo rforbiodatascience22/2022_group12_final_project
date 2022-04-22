@@ -42,4 +42,4 @@ pdb_entries <- entries_tsv %>%
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
-          file = "01_dat_load.tsv")
+          file = "data/01_dat_load.tsv")

@@ -1,5 +1,11 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(ggplot2)
 
 
 # Define functions --------------------------------------------------------
