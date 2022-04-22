@@ -13,11 +13,11 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data <- read_tsv(file = "data/01_my_data.tsv")
+pdb_entries <- read_tsv(file = "data/01_dat_load.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-my_data_clean <- my_data # %>% ...
+
 
 
 # Write data --------------------------------------------------------------
