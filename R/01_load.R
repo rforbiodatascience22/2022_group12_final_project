@@ -28,13 +28,15 @@ pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt",
 colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx',
                                     header = FALSE,
                                     nrows = 1, 
-                                    sep = ',')[1,]
+                                    sep = ',')[1,] %>% 
+  str_remove(pattern = " ")
 
 # Change letter of IDCODE to upper in pdb_entry_type_tsv
 pdb_entry_type_tsv <- pdb_entry_type_tsv %>% 
   mutate(IDCODE = str_to_upper(IDCODE))
 
 # Join the 2 tables by IDCODE
+
 
 # Write data --------------------------------------------------------------
 write_tsv(x = entries_raw,
