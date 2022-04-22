@@ -36,10 +36,10 @@ pdb_entry_type_tsv <- pdb_entry_type_tsv %>%
   mutate(IDCODE = str_to_upper(IDCODE))
 
 # Join the 2 tables by IDCODE
-
+pdb_entries <- entries_tsv %>% 
+  full_join(pdb_entry_type_tsv,
+            by = "IDCODE")
 
 # Write data --------------------------------------------------------------
-write_tsv(x = entries_raw,
-          file = "data/01_entries.tsv")
-write_tsv(x = pdb_entry_type_raw,
-          file = "data/01_pdb_entry_type.tsv")
+write_tsv(x = pdb_entries,
+          file = "01_dat_load.tsv")
