@@ -7,11 +7,14 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data <- read_tsv(file = "data/01_my_data.tsv")
+pdb_entries <- read_tsv(file = "data/01_dat_load.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-my_data_clean <- my_data # %>% ...
+#1. merge experiment type columns in one that contains info of all entries (use mutate)
+#2. homogenize NAs
+#3. subset data that contains source
+#4. create a column year/decade we can use to create "new entries per year per species" (line or density plot)
 
 
 # Write data --------------------------------------------------------------
