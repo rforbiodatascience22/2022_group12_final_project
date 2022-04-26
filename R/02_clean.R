@@ -18,7 +18,7 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 #4. create a column year/decade we can use to create "new entries per year per species" (line or density plot)
 
 # Clean data 
-#1. Remove the Experiment type column.
+#1. Remove the columns Author list and Experiment type.
 pdb_entries <- select(pdb_entries, -c('AUTHOR LIST', 'EXPERIMENT TYPE'))
 
 
