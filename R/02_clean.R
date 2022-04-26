@@ -19,7 +19,7 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 
 # Clean data 
 #1. Remove the columns Author list and Experiment type.
-pdb_entries <- select(pdb_entries, -c('AUTHOR LIST', 'EXPERIMENT TYPE'))
+pdb_entries_clean <- select(pdb_entries, -c('AUTHOR LIST', 'EXPERIMENT TYPE'))
 
 
 # Write data --------------------------------------------------------------
