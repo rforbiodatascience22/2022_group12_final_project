@@ -9,6 +9,9 @@ source(file = "R/99_project_functions.R")
 # Load data ---------------------------------------------------------------
 my_data_clean <- read_tsv(file = "data/02_my_data_clean.tsv")
 
+#Change accession date to year
+date_to_year <- format(as.Date(pdb_entries$`ACCESSION DATE`, '%m/%d/%y'), "%Y")
+pdb_entries$`ACCESSION DATE` <- date_to_year
 
 # Wrangle data ------------------------------------------------------------
 my_data_clean_aug <- my_data_clean # %>% ...
