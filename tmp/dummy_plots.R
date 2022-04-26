@@ -1,13 +1,30 @@
-
-x <- c(2000, 2000, 1999, 1999, 1998, 2002, 2001)
-y <- c(2.1, 2.0, 2.5, 2.4, 2.9, 2.0, 1.9)
-
-dummy_data <- data.frame('ACCESSION DATE' = x, 
-                         'RESOLUTION' = y)
-
-plot1 <- dummy_data %>%
+resolution_histogram <- pdb_entries %>%
+  filter(RESOLUTION < 5) %>%
   ggplot(
-    aes(x = RESOLUTION,
-        y = factor(ACCESSION.DATE))
+    mapping = aes(x = RESOLUTION)
   ) +
-  geom_boxplot()
+  geom_histogram(fill = `MOLECULE TYPE`) +
+  theme_minimal()
+
+resolution_histogram
+
+resolution_by_taxa <- pdb_entries %>%
+  filter(!grepl(';|,', 
+               SOURCE)
+         ) %>%
+  ggplot(mapping = aes(x = (SOURCE),
+                       y = RESOLUTION)
+  ) +
+  geom_boxplot(fill = as.factor(SOURCE)) +
+  theme_minimal()
+
+resolution_by_taxa
+
+taxa_histogram <- pdb_entries %>%
+  ggplot(
+    mapping = aes(x = as.factor(SOURCE))
+  ) +
+  geom_histogram() +
+  theme_minimal()
+
+taxa_histogram
