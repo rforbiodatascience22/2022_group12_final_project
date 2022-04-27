@@ -46,14 +46,19 @@ pdb_entries <- entries_tsv %>%
   full_join(pdb_entry_type_tsv,
             by = "IDCODE")
 
-# Change pdb IDs (accession) to match pdb_entries
+# Change pdb IDs (accession) in taxid_pdb to match pdb_entries
 taxid_pdb <- taxid_pdb %>% 
-  mutate(accession = str_match(accession, ".{4}"))
+  mutate(accession = str_replace(accession, "_.", "")) %>% 
+  distinct(accession, taxid)
 
 #Join taxid_pdb with previous data
 pdb_entries <- pdb_entries %>% 
   inner_join(taxid_pdb,
              by = c("IDCODE" = "accession"))
+
+# Select the taxid and superkingdom columns from taxonomy_taxid
+taxonomy_taxid <- taxonomy_taxid %>% 
+  distinct(taxid, superkingdom)
 
 #Join taxonomy_taxid with previous data
 pdb_entries <- pdb_entries %>% 
