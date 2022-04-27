@@ -22,9 +22,11 @@ entries_tsv <- read_tsv(file = "data/_raw/entries.idx",
 pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt", 
                                col_names = c("IDCODE", "MOLECULE TYPE", "EXPERIMENT TYPE"))
 
-#Load tax_ids
+#Load pdb.accession2taxid
+taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid")
 
-#Load file pdbs to taxids
+#Load taxonomy.tsv
+taxonomy_taxid <- read_tsv(file = "data/_raw/taxonomy.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
@@ -39,14 +41,24 @@ colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx',
 pdb_entry_type_tsv <- pdb_entry_type_tsv %>% 
   mutate(IDCODE = str_to_upper(IDCODE))
 
-# Join the 2 tables by IDCODE
+# Join entries_tsv and pdb_entry_type_tsv by IDCODE
 pdb_entries <- entries_tsv %>% 
   full_join(pdb_entry_type_tsv,
             by = "IDCODE")
 
-#Join pdb2taxid with data frame
+# Change pdb IDs (accession) to match pdb_entries
+taxid_pdb <- taxid_pdb %>% 
+  mutate(accession = str_match(accession, ".{4}"))
 
-#Join taxonomy with data frame
+#Join taxid_pdb with previous data
+pdb_entries <- pdb_entries %>% 
+  inner_join(taxid_pdb,
+             by = c("IDCODE" = "accession"))
+
+#Join taxonomy_taxid with previous data
+pdb_entries <- pdb_entries %>% 
+  inner_join(taxonomy_taxid,
+             by = "taxid")
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
