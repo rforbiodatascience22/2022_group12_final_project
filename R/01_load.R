@@ -22,6 +22,10 @@ entries_tsv <- read_tsv(file = "data/_raw/entries.idx",
 pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt", 
                                col_names = c("IDCODE", "MOLECULE TYPE", "EXPERIMENT TYPE"))
 
+#Load tax_ids
+
+#Load file pdbs to taxids
+
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
@@ -39,6 +43,10 @@ pdb_entry_type_tsv <- pdb_entry_type_tsv %>%
 pdb_entries <- entries_tsv %>% 
   full_join(pdb_entry_type_tsv,
             by = "IDCODE")
+
+#Join pdb2taxid with data frame
+
+#Join taxonomy with data frame
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
