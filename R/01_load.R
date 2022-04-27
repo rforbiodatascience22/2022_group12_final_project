@@ -22,12 +22,20 @@ entries_tsv <- read_tsv(file = "data/_raw/entries.idx",
 pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt", 
                                col_names = c("IDCODE", "MOLECULE TYPE", "EXPERIMENT TYPE"))
 
-#Load pdb.accession2taxid
+# Load pdb.accession2taxid
 taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid")
 
-#Load taxonomy.tsv
+# Load taxonomy.tsv
 taxonomy_taxid <- read_tsv(file = "data/_raw/taxonomy.tsv")
 
+# Load scop classification data
+scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt", 
+                       delim = str_match("^[:hashtag:][:space:]"),
+                       comment = "##",
+                       skip = 5)
+
+# Load scop classes
+scop_class <- read_tsv(file = "data/_raw/scop-description.txt")
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
@@ -36,6 +44,14 @@ colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx',
                                     nrows = 1, 
                                     sep = ',')[1,] %>% 
   str_remove(pattern = " ")
+
+# Set col_names of scop_pdb
+colnames(scop_pdb) <- read.table(file = 'data/_raw/scop-cla.txt',
+                                 #header = TRUE,
+                                 skip = 5,
+                                 nrows = 1, 
+                                 comment.char = "#",
+                                 sep = ' ')[1,]
 
 # Change letter of IDCODE to upper in pdb_entry_type_tsv
 pdb_entry_type_tsv <- pdb_entry_type_tsv %>% 
