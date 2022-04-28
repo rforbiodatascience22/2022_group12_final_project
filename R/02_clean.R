@@ -23,4 +23,4 @@ pdb_entries_clean <- pdb_entries %>%
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_clean,
-          file = "data/02_my_data_clean.tsv")
+          file = "data/02_dat_clean.tsv")
