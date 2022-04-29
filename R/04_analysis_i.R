@@ -49,6 +49,8 @@ pdb_taxonomy %>%
                        y = n,
                        fill = superkingdom)) +
   geom_col() +
+  geom_label(aes(label = n),
+             show.legend = FALSE) +
   scale_y_continuous(breaks = seq(0,120000,10000)) +
   scale_fill_discrete(breaks = c("Eukaryota", "Bacteria", "Viruses", "Archaea", "Others")) +
   theme_linedraw() +
@@ -57,24 +59,34 @@ pdb_taxonomy %>%
        x = "Superkingdom",
        y = "Number of entries",
        fill = "Superkingdom")
+ggsave(filename = "results/pdb_taxonomy.png")
 
 pdb_taxa_mol %>% 
-  ggplot(mapping = aes(x = factor(superkingdom,
-                                  level = c("Eukaryota", "Bacteria", "Viruses", "Archaea", "Others")),
+  ggplot(mapping = aes(x = factor(`MOLECULE TYPE`,
+                                  level = c("prot", "prot-nuc", "nuc")),
                        y = n,
-                       fill = superkingdom,
-                       alpha = `MOLECULE TYPE`)) +
+                       fill = `MOLECULE TYPE`)) +
   geom_col() +
-  scale_y_continuous(breaks = seq(0,120000,10000)) +
-  scale_fill_discrete(breaks = c("Eukaryota", "Bacteria", "Viruses", "Archaea", "Others")) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  labs(title = "PDB Data Distribution By Superkingdom",
-       x = "Superkingdom",
+  geom_label(aes(label = n),
+             show.legend = FALSE) +
+  facet_wrap(~superkingdom) +
+  ylim(0, 120000) +
+  scale_x_discrete(labels = c("prot" = "protein",
+                              "prot-nuc" = "protein-nucleic \nacid complex",
+                              "nuc" = "nucleic acid")) +
+  scale_fill_discrete(name = "Molecule type",
+                      breaks = c("prot", "prot-nuc", "nuc"),
+                      labels = c("protein", "protein-nucleic \nacid complex", "nucleic acid")) +
+  theme_linedraw() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
+  labs(title = "Molecule Type Distribution By Superkingdom",
+       x = "",
        y = "Number of entries",
-       fill = "Superkingdom",
-       alpha = "Superkingdom")
-
+       fill = "Molecule type")
+ggsave(filename = "results/pdb_taxa_mol.png",
+       height = 5)
 
 # Write data --------------------------------------------------------------
 write_tsv(...)
