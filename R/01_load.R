@@ -30,9 +30,10 @@ taxonomy_taxid <- read_tsv(file = "data/_raw/taxonomy.tsv")
 
 # Load scop classification data
 scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt", 
-                       delim = str_match("^[:hashtag:][:space:]"),
-                       comment = "##",
-                       skip = 5)
+                       col_names = FALSE,
+                       delim = ' ',
+                       skip = 6) %>%
+  select(X2, X11)
 
 # Load scop classes
 scop_class <- read_tsv(file = "data/_raw/scop-description.txt")
@@ -46,12 +47,7 @@ colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx',
   str_remove(pattern = " ")
 
 # Set col_names of scop_pdb
-colnames(scop_pdb) <- read.table(file = 'data/_raw/scop-cla.txt',
-                                 #header = TRUE,
-                                 skip = 5,
-                                 nrows = 1, 
-                                 comment.char = "#",
-                                 sep = ' ')[1,]
+colnames(scop_pdb) <- c("IDCODE", "SCOP")
 
 # Change letter of IDCODE to upper in pdb_entry_type_tsv
 pdb_entry_type_tsv <- pdb_entry_type_tsv %>% 
@@ -76,10 +72,15 @@ pdb_entries <- pdb_entries %>%
 taxonomy_taxid <- taxonomy_taxid %>% 
   distinct(taxid, superkingdom)
 
-#Join taxonomy_taxid with previous data
+# Join taxonomy_taxid with previous data
 pdb_entries <- pdb_entries %>% 
   inner_join(taxonomy_taxid,
              by = "taxid")
+
+# Join scop_pdb with previous data
+pdb_entries <- pdb_entries %>% 
+  inner_join(scop_p,
+             by = "IDCODE")
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
