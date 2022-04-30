@@ -10,7 +10,7 @@ source(file = "R/99_project_functions.R")
 pdb_entries_clean <- read_tsv(file = "data/02_dat_clean.tsv")
 
 #Change accession date to year
-pdb_entries_clean %>%
+pdb_entries_clean <- pdb_entries_clean %>%
   mutate(`ACCESSION DATE` = format(as.Date(`ACCESSION DATE`, '%m/%d/%y'), "%Y"))
 
 
