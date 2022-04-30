@@ -79,8 +79,8 @@ pdb_entries <- pdb_entries %>%
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
-  inner_join(scop_pdb,
-             by = "IDCODE")
+  full_join(scop_pdb,
+            by = "IDCODE")
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
