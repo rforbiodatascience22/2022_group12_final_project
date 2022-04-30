@@ -63,7 +63,7 @@ taxid_pdb <- taxid_pdb %>%
   mutate(accession = str_replace(accession, "_.", "")) %>% 
   distinct(accession, taxid)
 
-#Join taxid_pdb with previous data
+# Join taxid_pdb with previous data
 pdb_entries <- pdb_entries %>% 
   inner_join(taxid_pdb,
              by = c("IDCODE" = "accession"))
@@ -79,7 +79,7 @@ pdb_entries <- pdb_entries %>%
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
-  inner_join(scop_p,
+  inner_join(scop_pdb,
              by = "IDCODE")
 
 # Write data --------------------------------------------------------------
