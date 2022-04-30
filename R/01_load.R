@@ -20,7 +20,9 @@ entries_tsv <- read_tsv(file = "data/_raw/entries.idx",
 
 # Load pdb_entry_type.txt and set col_names manually
 pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt", 
-                               col_names = c("IDCODE", "MOLECULE TYPE", "EXPERIMENT TYPE"))
+                               col_names = c("IDCODE", 
+                                             "MOLECULE TYPE", 
+                                             "EXPERIMENT TYPE"))
 
 # Load pdb.accession2taxid
 taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid")
