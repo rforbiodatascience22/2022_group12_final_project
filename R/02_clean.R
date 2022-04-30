@@ -30,3 +30,4 @@ nucleotide <- str_replace(pdb_entries_clean$`MOLECULE TYPE`, "nuc", "NUCLEOTIDE"
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_clean,
           file = "data/02_dat_clean.tsv")
+            
