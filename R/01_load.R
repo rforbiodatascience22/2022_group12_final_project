@@ -28,7 +28,8 @@ pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt",
 taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid")
 
 # Load taxonomy.tsv
-taxonomy_taxid <- read_tsv(file = "data/_raw/taxonomy.tsv")
+taxonomy_taxid <- read_delim(file = "data/_raw/rankedlineage.tsv.gz",
+                           delim = "|")
 
 # Load scop classification data
 scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt", 
@@ -39,6 +40,7 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
 
 # Load scop classes
 scop_class <- read_tsv(file = "data/_raw/scop-description.txt")
+
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
@@ -70,14 +72,27 @@ pdb_entries <- pdb_entries %>%
   inner_join(taxid_pdb,
              by = c("IDCODE" = "accession"))
 
+# Change col_names of taxonomy_taxid
+colnames(taxonomy_taxid) <- c("taxid", 
+                              "tax_name", 
+                              "species", 
+                              "genus", 
+                              "family", 
+                              "order", 
+                              "class", 
+                              "phylum", 
+                              "kingdom", 
+                              "superkingdom",
+                              "NA")
+
 # Select the taxid and superkingdom columns from taxonomy_taxid
 taxonomy_taxid <- taxonomy_taxid %>% 
   distinct(taxid, superkingdom)
 
 # Join taxonomy_taxid with previous data
-pdb_entries <- pdb_entries %>% 
-  inner_join(taxonomy_taxid,
-             by = "taxid")
+#pdb_entries <- pdb_entries %>% 
+#  inner_join(taxonomy_taxid,
+#             by = "taxid")
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
