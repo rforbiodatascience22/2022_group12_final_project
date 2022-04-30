@@ -8,7 +8,8 @@ source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
 pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
-                        na = c("NOT", "NA"))
+                        na = c("NOT", 
+                               "NA"))
 
 
 # Wrangle data --------------------------------------------------------------
@@ -18,9 +19,13 @@ pdb_entries_clean <- pdb_entries %>%
 
 #Rewrite Molecule type
 pdb_entries_clean <- pdb_entries_clean %>% 
-                     mutate(str_replace('MOLECULE TYPE', "prot", "PROTEIN"))
+                     mutate(str_replace('MOLECULE TYPE', 
+                                        "prot", 
+                                        "PROTEIN"))
 pdb_entries_clean<- pdb_entries_clean %>% 
-                    mutate(str_replace('MOLECULE TYPE', "nuc", "NUCLEOTIDE")) 
+                    mutate(str_replace('MOLECULE TYPE', 
+                                       "nuc", 
+                                       "NUCLEOTIDE")) 
 
 
 # Write data --------------------------------------------------------------
