@@ -20,11 +20,11 @@ resolution_by_taxa <- pdb_entries %>%
 
 resolution_by_taxa
 
-taxa_histogram <- pdb_entries %>%
+accession_date_histogram <- pdb_entries %>%
   ggplot(
-    mapping = aes(x = as.factor(SOURCE))
+    mapping = aes(x = `ACCESSION DATE`)
   ) +
   geom_histogram() +
   theme_minimal()
 
-taxa_histogram
+accession_date_histogram
