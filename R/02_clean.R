@@ -20,6 +20,12 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 pdb_entries_clean <- pdb_entries %>% 
   select(-c(`AUTHOR LIST`,`EXPERIMENT TYPE`,RESOLUTION,taxid))
 
+#Rewrite Molecule type
+protein <- str_replace(pdb_entries_clean$`MOLECULE TYPE`, "prot", "PROTEIN")
+           pdb_entries_clean$`MOLECULE TYPE` <- protein 
+nucleotide <- str_replace(pdb_entries_clean$`MOLECULE TYPE`, "nuc", "NUCLEOTIDE")
+              pdb_entries_clean$`MOLECULE TYPE` <- nucleotide
+
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_clean,
