@@ -17,10 +17,10 @@ pdb_entries_clean <- pdb_entries %>%
   select(-c(`AUTHOR LIST`,`EXPERIMENT TYPE`,RESOLUTION,taxid))
 
 #Rewrite Molecule type
-protein <- str_replace(pdb_entries_clean$`MOLECULE TYPE`, "prot", "PROTEIN")
-           pdb_entries_clean$`MOLECULE TYPE` <- protein 
-nucleotide <- str_replace(pdb_entries_clean$`MOLECULE TYPE`, "nuc", "NUCLEOTIDE")
-              pdb_entries_clean$`MOLECULE TYPE` <- nucleotide
+pdb_entries_clean <- pdb_entries_clean %>% 
+                     mutate(str_replace('MOLECULE TYPE', "prot", "PROTEIN"))
+pdb_entries_clean<- pdb_entries_clean %>% 
+                    mutate(str_replace('MOLECULE TYPE', "nuc", "NUCLEOTIDE")) 
 
 
 # Write data --------------------------------------------------------------
