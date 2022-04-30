@@ -86,9 +86,8 @@ pdb_taxa_mol %>%
        y = "Number of entries",
        fill = "Molecule type")
 ggsave(filename = "results/pdb_taxa_mol.png",
-       height = 5,
-       width = 6.27)
+       height = 5)
 
 # Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+#write_tsv(...)
+#ggsave(...)
