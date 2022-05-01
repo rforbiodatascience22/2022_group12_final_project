@@ -39,8 +39,10 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
   select(X2, X11)
 
 # Load scop classes
-scop_class <- read_tsv(file = "data/_raw/scop-description.txt")
-scop_ref <- read_tsv(file = "data/_raw/scop-description.txt")
+scop_ref <- read_delim(file = "data/_raw/scop-description.txt",
+                       delim = ' ',
+                       skip = 1,
+                       col_names = c("class_number", "class_name"))
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
