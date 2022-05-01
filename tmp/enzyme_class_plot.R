@@ -8,4 +8,5 @@ pdb_entries_aug %>%
   mutate(enzyme_class = reorder(HEADER, desc(n))) %>%
   ggplot(aes(x = enzyme_class, y = n))  +
   geom_bar(stat = "identity") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme_minimal()
