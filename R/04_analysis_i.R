@@ -42,7 +42,9 @@ pdb_taxa_mol
 
 
 # Visualise data ----------------------------------------------------------
-# PDB Data Distribution By Superkingdom
+######################
+### TAXONOMY PLOTS ###
+######################
 pdb_taxonomy %>% 
   ggplot(mapping = aes(x = factor(superkingdom, 
                                   level = c("Eukaryota", 
