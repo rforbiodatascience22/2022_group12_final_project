@@ -1,39 +1,30 @@
-#Running source org again
-#ggplot(data = pdb_entries_aug, 
-       #mapping = aes(x = 'ACCESSION DATE'))
-       #geom_histogram()
-
-
-accession_date_histogram <- pdb_entries %>%
-  ggplot(
-    mapping = aes(x = `ACCESSION DATE`)
-  ) +
-  geom_histogram() +
-  theme_minimal()
-
-accession_date_histogram
-
-
-
 #Let's try this again
 protein <- str_replace(pdb_entries_clean$'MOLECULE TYPE', "prot", "PROTEIN")
            pdb_entries_clean$'MOLECULE TYPE' <- protein
 nucleotide <- str_replace(pdb_entries_clean$'MOLECULE TYPE', "nuc", "NUCLEOTIDE")
               pdb_entries_clean$'MOLECULE TYPE' <- nucleotide
 
-molecule_bar <- pdb_entries_clean %>% drop_na('MOLECULE TYPE') %>% 
-  ggplot(
-  mapping = aes(x = `MOLECULE TYPE`)) +
+#Plot 1 - Entity type bar plot
+molecule_bar <- pdb_entries_clean %>% 
+                drop_na('MOLECULE TYPE') %>% 
+  ggplot(mapping = aes(x = `MOLECULE TYPE`)) +
   geom_bar() +
-  theme_minimal()
+  theme_linedraw() +
+  labs(title = "Distribution of Structures by Entity Type",
+       x = "Entity Type",
+       y = "")
 
 molecule_bar  
 
-accession_year_bar <- pdb_entries_clean %>% drop_na('ACCESSION DATE') %>%  
-  ggplot(
-    mapping = aes(y = `ACCESSION DATE`)) +
+#Plot2 - Distribution of structures based on entry year
+accession_year_bar <- pdb_entries_clean %>% 
+                      drop_na('ACCESSION DATE') %>%  
+  ggplot(mapping = aes(y = `ACCESSION DATE`)) +
   geom_bar() +
-  theme_minimal()
+  theme_linedraw() +
+  labs(title = "Distribution of Structures by Date of Entry into PDB",
+       x = "",
+       y = "Accession year")
 
 accession_year_bar  
 
