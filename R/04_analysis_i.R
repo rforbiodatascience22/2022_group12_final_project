@@ -18,7 +18,7 @@ pdb_entries_aug <- read_tsv(file = "data/03_dat_augment.tsv")
 # Select superkingdom and molecule type columns, then tidy
 taxonomy_df <- pdb_entries_aug %>% 
   select(IDCODE, superkingdom, `MOLECULE TYPE`) %>% 
-  replace_na(list(superkingdom = "Others"))
+  replace_na(list(superkingdom = "Unclassified"))
 
 # Count number of entries per superkingdom
 pdb_taxonomy <- taxonomy_df %>% 
@@ -45,14 +45,22 @@ pdb_taxa_mol
 # PDB Data Distribution By Superkingdom
 pdb_taxonomy %>% 
   ggplot(mapping = aes(x = factor(superkingdom, 
-                                  level = c("Eukaryota", "Bacteria", "Viruses", "Archaea", "Others")),
+                                  level = c("Eukaryota", 
+                                            "Bacteria", 
+                                            "Viruses", 
+                                            "Archaea", 
+                                            "Unclassified")),
                        y = n,
                        fill = superkingdom)) +
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
   scale_y_continuous(breaks = seq(0,120000,10000)) +
-  scale_fill_discrete(breaks = c("Eukaryota", "Bacteria", "Viruses", "Archaea", "Others")) +
+  scale_fill_discrete(breaks = c("Eukaryota", 
+                                 "Bacteria", 
+                                 "Viruses", 
+                                 "Archaea", 
+                                 "Unclassified")) +
   theme_linedraw() +
   theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "PDB Data Distribution By Superkingdom",
@@ -63,7 +71,9 @@ ggsave(filename = "results/pdb_taxonomy.png")
 
 pdb_taxa_mol %>% 
   ggplot(mapping = aes(x = factor(`MOLECULE TYPE`,
-                                  level = c("prot", "prot-nuc", "nuc")),
+                                  level = c("prot", 
+                                            "prot-nuc", 
+                                            "nuc")),
                        y = n,
                        fill = `MOLECULE TYPE`)) +
   geom_col() +
@@ -75,8 +85,12 @@ pdb_taxa_mol %>%
                               "prot-nuc" = "protein-nucleic \nacid complex",
                               "nuc" = "nucleic acid")) +
   scale_fill_discrete(name = "Molecule type",
-                      breaks = c("prot", "prot-nuc", "nuc"),
-                      labels = c("protein", "protein-nucleic \nacid complex", "nucleic acid")) +
+                      breaks = c("prot", 
+                                 "prot-nuc", 
+                                 "nuc"),
+                      labels = c("protein", 
+                                 "protein-nucleic \nacid complex", 
+                                 "nucleic acid")) +
   theme_linedraw() +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_blank(),
