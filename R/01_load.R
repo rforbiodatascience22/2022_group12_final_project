@@ -40,7 +40,7 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
 
 # Load scop classes
 scop_class <- read_tsv(file = "data/_raw/scop-description.txt")
-
+scop_ref <- read_tsv(file = "data/_raw/scop-description.txt")
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
