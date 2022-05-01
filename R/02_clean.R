@@ -17,6 +17,11 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 pdb_entries_clean <- pdb_entries %>% 
   select(-c(`AUTHOR LIST`,`EXPERIMENT TYPE`,RESOLUTION,taxid))
 
+#Clean scop column
+pdb_entries_clean <- pdb_entries_clean %>% 
+  mutate(SCOP = str_match(SCOP,"CL=[\\d]+"),
+         SCOP = str_match(SCOP, "[\\d]+"))
+
 #Rewrite Molecule type
 # pdb_entries_clean <- pdb_entries_clean %>% 
 #                      mutate(str_replace('MOLECULE TYPE', 
