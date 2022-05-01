@@ -87,12 +87,13 @@ colnames(taxonomy_taxid) <- c("taxid",
 
 # Select the taxid and superkingdom columns from taxonomy_taxid
 taxonomy_taxid <- taxonomy_taxid %>% 
-  distinct(taxid, superkingdom)
+  distinct(taxid, superkingdom) %>% 
+  mutate(taxid = as.double(taxid))
 
 # Join taxonomy_taxid with previous data
-#pdb_entries <- pdb_entries %>% 
-#  inner_join(taxonomy_taxid,
-#             by = "taxid")
+pdb_entries <- pdb_entries %>% 
+  inner_join(taxonomy_taxid,
+             by = "taxid")
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
