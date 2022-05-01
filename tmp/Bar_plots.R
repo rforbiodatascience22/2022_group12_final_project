@@ -29,6 +29,14 @@ molecule_bar <- pdb_entries_clean %>% drop_na('MOLECULE TYPE') %>%
 
 molecule_bar  
 
+accession_year_bar <- pdb_entries_clean %>% drop_na('ACCESSION DATE') %>%  
+  ggplot(
+    mapping = aes(y = `ACCESSION DATE`)) +
+  geom_bar() +
+  theme_minimal()
+
+accession_year_bar  
+
 
 
 
