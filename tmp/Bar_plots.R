@@ -7,26 +7,30 @@
 #Plot 1 - Entity type bar plot
 molecule_bar <- pdb_entries_aug %>% 
                 drop_na(`MOLECULE TYPE`) %>% 
+  group_by(`MOLECULE TYPE`) %>%
+  #summarise(`MOLECULE TYPE` = n()) %>% 
   filter(`MOLECULE TYPE` != "other") %>% 
-  ggplot(mapping = aes(x = `MOLECULE TYPE`)) +
+  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
+  arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
+  ggplot(mapping = aes(x = `MOLECULE TYPE`, fill = `MOLECULE TYPE`)) +
   geom_bar() + 
   theme_linedraw() +
   labs(title = "Distribution of Structures by Entity Type",
        x = "Entity Type",
        y = "")
 
-molecule_bar  
+molecule_bar
 
 #Plot2 - Distribution of structures based on entry year
 accession_year_bar <- pdb_entries_aug %>% 
-                      drop_na(YEAR) %>%  
+                      drop_na(YEAR) %>% 
   ggplot(mapping = aes(x = YEAR)) +
   geom_bar() +
   theme_linedraw() + 
   theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
   labs(title = "Distribution of Structures by Year of Entry into PDB",
-       x = "",
-       y = "Accession year")
+       x = "Accession year",
+       y = "")
 
 accession_year_bar  
 
@@ -45,7 +49,9 @@ experiment_bar
 
 #Plot for source needs more cleaning 
 
-source_bar <- pdb_entries_aug %>% #str_replace('SOURCE', "; ", "") %>% 
+source_bar <- pdb_entries_aug %>% 
+              mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
+                     SOURCE = str_match(SOURCE, "[\\w]+")[,1]) %>% #str_replace('SOURCE', "; ", "") %>% 
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
@@ -58,3 +64,40 @@ theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 source_bar
+
+install.packages("wesanderson")
+library(wesanderson)
+
+pdb_entries_aug %>% 
+isthisworking <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
+                                            SOURCE = str_match_all SOURCE, "[\w]", ""))
+#pdb_entries_aug %>%  mutate(SOURCE = str_match(SOURCE,"[:;:]+")[, 1])
+      # scop_reference = str_match(scop_reference, "[\\d]+")[, 1])
+
+#try2 <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE
+
+
+
+#Duumy plot 
+pdb_entries_aug %>% 
+  drop_na(`MOLECULE TYPE`) %>% 
+  group_by(`MOLECULE TYPE`) %>%
+  summarise(`MOLECULE TYPE` = n()) %>% 
+  #filter(`MOLECULE TYPE` != "other") %>% 
+  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
+  #arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
+  ggplot(mapping = aes(x = reorder(`MOLECULE TYPE`, `MOLECULE TYPE`))) +  #, fill = `MOLECULE TYPE`)) +
+  geom_bar() + 
+  theme_linedraw() +
+  labs(title = "Distribution of Structures by Entity Type",
+       x = "Entity Type",
+       y = "")
+
+pdb_entries_aug %>%  ggplot(mapping = 
+  aes(
+      x = `MOLECULE TYPE`, y = n)) +
+  geom_bar(stat = "identity")+
+  coord_flip()
+
+
+pdb_entries_aug %>% count(`MOLECULE TYPE`)
