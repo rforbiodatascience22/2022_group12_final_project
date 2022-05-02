@@ -69,7 +69,8 @@ pdb_taxonomy %>%
        x = "Superkingdom",
        y = "Number of entries",
        fill = "Superkingdom")
-ggsave(filename = "results/pdb_taxonomy.png")
+ggsave(filename = "results/pdb_taxonomy.png",
+       width = 5.5)
 
 pdb_taxa_mol %>% 
   ggplot(mapping = aes(x = factor(`MOLECULE TYPE`,
