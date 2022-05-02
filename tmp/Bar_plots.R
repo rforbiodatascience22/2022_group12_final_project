@@ -43,7 +43,7 @@ experiment_bar
 
 #Plot for source needs more cleaning 
 
-source_bar <- pdb_entries_clean %>% str_remove('SOURCE', "; ") %>% 
+source_bar <- pdb_entries_clean %>% str_replace('SOURCE', "; ", "") %>% 
 drop_na('SOURCE') %>% 
 ggplot(mapping = aes(x = 'SOURCE')) +
 geom_bar() +
