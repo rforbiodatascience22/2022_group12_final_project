@@ -1,5 +1,6 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
+library("wesanderson")
 
 
 # Define functions --------------------------------------------------------
