@@ -15,24 +15,12 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 # Wrangle data --------------------------------------------------------------
 # Remove unnecessary columns
 pdb_entries_clean <- pdb_entries %>% 
-  select(-c(`AUTHOR LIST`,`EXPERIMENT TYPE`,RESOLUTION,taxid))
-
-#Clean scop column
-#pdb_entries_clean <- pdb_entries_clean %>% 
-#  mutate(SCOP = str_match(SCOP,"CL=[\\d]+"),
-#         SCOP = str_match(SCOP, "[\\d]+"))
-
-
-
-#Rewrite Molecule type
-# pdb_entries_clean <- pdb_entries_clean %>% 
-#                      mutate(str_replace('MOLECULE TYPE', 
-#                                         "prot", 
-#                                         "PROTEIN"))
-# pdb_entries_clean<- pdb_entries_clean %>% 
-#                     mutate(str_replace('MOLECULE TYPE', 
-#                                        "nuc", 
-#                                        "NUCLEOTIDE"))
+  select(-c(`AUTHOR LIST`,
+            `EXPERIMENT TYPE`,
+            RESOLUTION,
+            taxid,
+            scop_reference)) %>% 
+  rename(`EXPERIMENT TYPE` = 6)
 
 
 # Write data --------------------------------------------------------------

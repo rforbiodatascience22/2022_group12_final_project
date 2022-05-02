@@ -42,7 +42,7 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
 scop_ref <- read_delim(file = "data/_raw/scop-description.txt",
                        delim = ' ',
                        skip = 1,
-                       col_names = c("scop_reference", "scop_name"))
+                       col_names = c("scop_reference", "SCOP_NAME"))
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
@@ -84,13 +84,13 @@ colnames(taxonomy_taxid) <- c("taxid",
                               "class", 
                               "phylum", 
                               "kingdom", 
-                              "superkingdom",
+                              "SUPERKINGDOM",
                               "NA")
 
 # Select the taxid and superkingdom columns from taxonomy_taxid
 taxonomy_taxid <- taxonomy_taxid %>% 
   mutate(taxid = as.double(taxid)) %>% 
-  distinct(taxid, superkingdom)
+  distinct(taxid, SUPERKINGDOM)
 
 # Join taxonomy_taxid with previous data
 pdb_entries <- pdb_entries %>% 
