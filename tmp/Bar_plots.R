@@ -15,7 +15,7 @@ molecule_bar <- pdb_entries_aug %>%
        x = "Entity Type",
        y = "")
 
-molecule_bar  
+molecule_bar + scale_co
 
 #Plot2 - Distribution of structures based on entry year
 accession_year_bar <- pdb_entries_aug %>% 
@@ -45,7 +45,9 @@ experiment_bar
 
 #Plot for source needs more cleaning 
 
-source_bar <- pdb_entries_aug %>% #str_replace('SOURCE', "; ", "") %>% 
+source_bar <- pdb_entries_aug %>% 
+              mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
+                     SOURCE = str_match(SOURCE, "[\\w]+")[,1]) %>% #str_replace('SOURCE', "; ", "") %>% 
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
@@ -58,3 +60,14 @@ theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 source_bar
+
+install.packages("wesanderson")
+library(wesanderson)
+
+pdb_entries_aug %>% 
+isthisworking <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
+                                            SOURCE = str_match_all SOURCE, "[\w]", ""))
+#pdb_entries_aug %>%  mutate(SOURCE = str_match(SOURCE,"[:;:]+")[, 1])
+      # scop_reference = str_match(scop_reference, "[\\d]+")[, 1])
+
+#try2 <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE
