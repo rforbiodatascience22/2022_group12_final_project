@@ -33,6 +33,8 @@ pdb_taxa_mol <- taxonomy_df %>%
   group_by(SUPERKINGDOM, `MOLECULE TYPE`) %>% 
   add_tally(name = "n") %>% 
   distinct(SUPERKINGDOM, `MOLECULE TYPE`, n) %>% 
+  filter(`MOLECULE TYPE` != "other") %>% 
+  drop_na(`MOLECULE TYPE`) %>% 
   arrange(SUPERKINGDOM)
 pdb_taxa_mol
 
