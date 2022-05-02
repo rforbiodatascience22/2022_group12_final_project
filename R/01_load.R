@@ -42,18 +42,18 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
 scop_ref <- read_delim(file = "data/_raw/scop-description.txt",
                        delim = ' ',
                        skip = 1,
-                       col_names = c("class_number", "class_name"))
+                       col_names = c("scop_reference", "scop_name"))
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
-colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx',
+colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx', 
                                     header = FALSE,
                                     nrows = 1, 
                                     sep = ',')[1,] %>% 
   str_remove(pattern = " ")
 
 # Set col_names of scop_pdb
-colnames(scop_pdb) <- c("IDCODE", "SCOP")
+colnames(scop_pdb) <- c("IDCODE", "scop_reference")
 
 # Change letter of IDCODE to upper in pdb_entry_type_tsv
 pdb_entry_type_tsv <- pdb_entry_type_tsv %>% 
@@ -101,6 +101,16 @@ pdb_entries <- pdb_entries %>%
 pdb_entries <- pdb_entries %>% 
   full_join(scop_pdb,
             by = "IDCODE")
+
+# Clean SCOP column of data frame in order to be able to join it with scop_ref
+pdb_entries <- pdb_entries %>% 
+  mutate(scop_reference = str_match(scop_reference,"CL=[\\d]+")[, 1],
+         scop_reference = str_match(scop_reference, "[\\d]+")[, 1])
+
+# Join pdb_entries with scop_ref
+pdb_entries <- pdb_entries %>% 
+  inner_join(scop_ref,
+             by = "scop_reference")
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
