@@ -7,26 +7,30 @@
 #Plot 1 - Entity type bar plot
 molecule_bar <- pdb_entries_aug %>% 
                 drop_na(`MOLECULE TYPE`) %>% 
+  group_by(`MOLECULE TYPE`) %>%
+  #summarise(`MOLECULE TYPE` = n()) %>% 
   filter(`MOLECULE TYPE` != "other") %>% 
-  ggplot(mapping = aes(x = `MOLECULE TYPE`)) +
+  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
+  arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
+  ggplot(mapping = aes(x = `MOLECULE TYPE`, fill = `MOLECULE TYPE`)) +
   geom_bar() + 
   theme_linedraw() +
   labs(title = "Distribution of Structures by Entity Type",
        x = "Entity Type",
        y = "")
 
-molecule_bar + scale_co
+molecule_bar
 
 #Plot2 - Distribution of structures based on entry year
 accession_year_bar <- pdb_entries_aug %>% 
-                      drop_na(YEAR) %>%  
+                      drop_na(YEAR) %>% 
   ggplot(mapping = aes(x = YEAR)) +
   geom_bar() +
   theme_linedraw() + 
   theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
   labs(title = "Distribution of Structures by Year of Entry into PDB",
-       x = "",
-       y = "Accession year")
+       x = "Accession year",
+       y = "")
 
 accession_year_bar  
 
@@ -71,3 +75,29 @@ isthisworking <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE, "[:
       # scop_reference = str_match(scop_reference, "[\\d]+")[, 1])
 
 #try2 <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE
+
+
+
+#Duumy plot 
+pdb_entries_aug %>% 
+  drop_na(`MOLECULE TYPE`) %>% 
+  group_by(`MOLECULE TYPE`) %>%
+  summarise(`MOLECULE TYPE` = n()) %>% 
+  #filter(`MOLECULE TYPE` != "other") %>% 
+  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
+  #arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
+  ggplot(mapping = aes(x = reorder(`MOLECULE TYPE`, `MOLECULE TYPE`))) +  #, fill = `MOLECULE TYPE`)) +
+  geom_bar() + 
+  theme_linedraw() +
+  labs(title = "Distribution of Structures by Entity Type",
+       x = "Entity Type",
+       y = "")
+
+pdb_entries_aug %>%  ggplot(mapping = 
+  aes(
+      x = `MOLECULE TYPE`, y = n)) +
+  geom_bar(stat = "identity")+
+  coord_flip()
+
+
+pdb_entries_aug %>% count(`MOLECULE TYPE`)
