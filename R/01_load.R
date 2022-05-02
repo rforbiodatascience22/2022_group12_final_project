@@ -46,10 +46,10 @@ scop_ref <- read_delim(file = "data/_raw/scop-description.txt",
 
 # Wrangle data ------------------------------------------------------------
 # Set col_names of entries_tsv
-colnames(entries_tsv) <- read.table(file = 'data/_raw/entries.idx', 
-                                    header = FALSE,
-                                    nrows = 1, 
-                                    sep = ',')[1,] %>% 
+colnames(entries_tsv) <- read_delim(file = 'data/_raw/entries.idx',
+                                  n_max = 1, 
+                                  delim = ',') %>% 
+  colnames() %>% 
   str_remove(pattern = " ")
 
 # Set col_names of scop_pdb
