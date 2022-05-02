@@ -1,5 +1,5 @@
 ---
-title: "Presentation"
+title: "Improving PDB metadata visualizations"
 author: "Group 12"
 date: '2022-05-02'
 output: ioslides_presentation
