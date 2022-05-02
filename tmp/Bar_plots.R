@@ -28,21 +28,25 @@ accession_year_bar <- pdb_entries_clean %>%
 
 accession_year_bar  
 
+#Plot3 - Distribution of structures based on Experiment Type
+experiment_bar <- pdb_entries_aug %>% 
+  drop_na('EXPERIMENT TYPE (IF NOT X-RAY)') %>%  
+  ggplot(mapping = aes(y = 'EXPERIMENT TYPE (IF NOT X-RAY)')) +
+  geom_bar() +
+  theme_linedraw() +
+  labs(title = "Distribution of Structures based on Experiment type",
+       x = "",
+       y = "Experiment type")
 
+experiment_bar 
 
 
 #Plot for source needs more cleaning 
 
-#pdb_entries_aug %>% str_remove_all("; ") 
+source_bar <- pdb_entries_clean %>% str_remove('SOURCE', "; ") %>% 
+drop_na('SOURCE') %>% 
+ggplot(mapping = aes(x = 'SOURCE')) +
+geom_bar() +
+theme_minimal()
 
-
-
-#source_bar <- pdb_entries_aug %>% drop_na('SOURCE') %>% 
- # ggplot(
-  
-#mapping = aes(y = `SOURCE`)) +
- # geom_bar() +
-  
-#theme_minimal()
-
-#source_bar
+source_bar
