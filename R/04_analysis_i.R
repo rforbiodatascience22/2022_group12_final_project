@@ -17,23 +17,23 @@ pdb_entries_aug <- read_tsv(file = "data/03_dat_augment.tsv")
 
 # Select superkingdom and molecule type columns, then tidy
 taxonomy_df <- pdb_entries_aug %>% 
-  select(IDCODE, superkingdom, `MOLECULE TYPE`) %>% 
-  replace_na(list(superkingdom = "Unclassified"))
+  select(IDCODE, SUPERKINGDOM, `MOLECULE TYPE`) %>% 
+  replace_na(list(SUPERKINGDOM = "Unclassified"))
 
 # Count number of entries per superkingdom
 pdb_taxonomy <- taxonomy_df %>% 
-  group_by(superkingdom) %>% 
+  group_by(SUPERKINGDOM) %>% 
   add_tally(name = "n",
             sort = TRUE) %>% 
-  distinct(superkingdom, n)
+  distinct(SUPERKINGDOM, n)
 pdb_taxonomy
 
 # Count number of entries per superkingdom stratified by molecule type
 pdb_taxa_mol <- taxonomy_df %>% 
-  group_by(superkingdom, `MOLECULE TYPE`) %>% 
+  group_by(SUPERKINGDOM, `MOLECULE TYPE`) %>% 
   add_tally(name = "n") %>% 
-  distinct(superkingdom, `MOLECULE TYPE`, n) %>% 
-  arrange(superkingdom)
+  distinct(SUPERKINGDOM, `MOLECULE TYPE`, n) %>% 
+  arrange(SUPERKINGDOM)
 pdb_taxa_mol
 
 
@@ -46,14 +46,14 @@ pdb_taxa_mol
 ### TAXONOMY PLOTS ###
 ######################
 pdb_taxonomy %>% 
-  ggplot(mapping = aes(x = factor(superkingdom, 
+  ggplot(mapping = aes(x = factor(SUPERKINGDOM, 
                                   level = c("Eukaryota", 
                                             "Bacteria", 
                                             "Viruses", 
                                             "Archaea", 
                                             "Unclassified")),
                        y = n,
-                       fill = superkingdom)) +
+                       fill = SUPERKINGDOM)) +
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
@@ -81,7 +81,7 @@ pdb_taxa_mol %>%
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
-  facet_wrap(~superkingdom) +
+  facet_wrap(~SUPERKINGDOM) +
   ylim(0, 120000) +
   scale_x_discrete(labels = c("prot" = "protein",
                               "prot-nuc" = "protein-nucleic \nacid complex",
