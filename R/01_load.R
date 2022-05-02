@@ -109,8 +109,8 @@ pdb_entries <- pdb_entries %>%
 
 # Join pdb_entries with scop_ref
 pdb_entries <- pdb_entries %>% 
-  inner_join(scop_ref,
-             by = "scop_reference")
+  left_join(scop_ref,
+            by = "scop_reference")
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries,
