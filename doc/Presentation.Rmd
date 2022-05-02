@@ -1,6 +1,6 @@
 ---
 title: "Improving PDB metadata visualizations"
-author: "Group 12"
+author: "Group 12: Deeptha Sri, Eric Bautista, Jonathan Funk, Laura Machado"
 date: '2022-05-02'
 output: ioslides_presentation
 ---
@@ -9,27 +9,32 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## Intoduction
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+- what we want to do?
+- why do we want to do it?
+- show the problem (some example plots)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+![example of pie chart on the rcsb](example_pdb_piechart.png){width=75%}
 
-## Slide with Bullets
+## Data
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- show which data we needed based on plots we wanted to do
 
-## Slide with R Output
+(for example the scop data, and what did we need from there)
+
+## Our bar plots
 
 ```{r cars, echo = TRUE}
 summary(cars)
 ```
 
 ## Slide with Plot
-
+- Just show the plots, important parts of code and biological/scientific insight
 ```{r pressure}
 plot(pressure)
 ```
 
+## Discussion
+
+## End
