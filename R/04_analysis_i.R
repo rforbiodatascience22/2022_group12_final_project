@@ -38,61 +38,66 @@ pdb_taxa_mol <- taxonomy_df %>%
   arrange(SUPERKINGDOM)
 pdb_taxa_mol
 
-
 # Model data
 # my_data_clean_aug %>% ...
 
 
 # Visualise data ----------------------------------------------------------
+
 ######################
 ### TAXONOMY PLOTS ###
 ######################
+
+# Store superkingdom levels to use in plots
+taxa_levels = c("Eukaryota", 
+                "Bacteria", 
+                "Viruses", 
+                "Archaea", 
+                "Unclassified")
+
+# Store molecule type levels to use in plots
+mol_levels = c("prot", 
+               "prot-nuc", 
+               "nuc")
+
+# Plot PDB Data Distribution By Superkingdom
 pdb_taxonomy %>% 
   ggplot(mapping = aes(x = factor(SUPERKINGDOM, 
-                                  level = c("Eukaryota", 
-                                            "Bacteria", 
-                                            "Viruses", 
-                                            "Archaea", 
-                                            "Unclassified")),
+                                  level = taxa_levels),
                        y = n,
                        fill = SUPERKINGDOM)) +
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
   scale_y_continuous(breaks = seq(0,120000,10000)) +
-  scale_fill_discrete(breaks = c("Eukaryota", 
-                                 "Bacteria", 
-                                 "Viruses", 
-                                 "Archaea", 
-                                 "Unclassified")) +
+  scale_fill_discrete(breaks = taxa_levels) +
   theme_linedraw() +
   theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "PDB Data Distribution By Superkingdom",
        x = "Superkingdom",
        y = "Number of entries",
        fill = "Superkingdom")
+
 ggsave(filename = "results/pdb_taxonomy.png",
        width = 5.5)
 
+# Plot Molecule Type Distribution By Superkingdom
 pdb_taxa_mol %>% 
   ggplot(mapping = aes(x = factor(`MOLECULE TYPE`,
-                                  level = c("prot", 
-                                            "prot-nuc", 
-                                            "nuc")),
+                                  level = mol_levels),
                        y = n,
                        fill = `MOLECULE TYPE`)) +
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
-  facet_wrap(~SUPERKINGDOM) +
+  facet_wrap(~factor(SUPERKINGDOM,
+                     levels = taxa_levels)) +
   ylim(0, 120000) +
   scale_x_discrete(labels = c("prot" = "protein",
                               "prot-nuc" = "protein-nucleic \nacid complex",
                               "nuc" = "nucleic acid")) +
   scale_fill_discrete(name = "Molecule type",
-                      breaks = c("prot", 
-                                 "prot-nuc", 
-                                 "nuc"),
+                      breaks = mol_levels,
                       labels = c("protein", 
                                  "protein-nucleic \nacid complex", 
                                  "nucleic acid")) +
@@ -104,8 +109,10 @@ pdb_taxa_mol %>%
        x = "",
        y = "Number of entries",
        fill = "Molecule type")
+
 ggsave(filename = "results/pdb_taxa_mol.png",
-       height = 5)
+       height = 5,
+       width = 7)
 
 # Write data --------------------------------------------------------------
 #write_tsv(...)
