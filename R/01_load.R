@@ -71,8 +71,8 @@ taxid_pdb <- taxid_pdb %>%
 
 # Join taxid_pdb with previous data
 pdb_entries <- pdb_entries %>% 
-  inner_join(taxid_pdb,
-             by = c("IDCODE" = "accession"))
+  full_join(taxid_pdb,
+            by = c("IDCODE" = "accession"))
 
 # Change col_names of taxonomy_taxid
 colnames(taxonomy_taxid) <- c("taxid", 
@@ -94,8 +94,8 @@ taxonomy_taxid <- taxonomy_taxid %>%
 
 # Join taxonomy_taxid with previous data
 pdb_entries <- pdb_entries %>% 
-  inner_join(taxonomy_taxid,
-             by = "taxid")
+  left_join(taxonomy_taxid,
+            by = "taxid")
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
