@@ -1,6 +1,5 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
-library("wesanderson")
 
 
 # Define functions --------------------------------------------------------
@@ -71,7 +70,8 @@ pdb_taxonomy %>%
   geom_label(aes(label = n),
              show.legend = FALSE) +
   scale_y_continuous(breaks = seq(0,120000,10000)) +
-  scale_fill_discrete(breaks = taxa_levels) +
+  scale_fill_brewer(palette = "Set1",
+                    breaks = taxa_levels) +
   theme_linedraw() +
   theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "PDB Data Distribution By Superkingdom",
@@ -97,11 +97,12 @@ pdb_taxa_mol %>%
   scale_x_discrete(labels = c("prot" = "protein",
                               "prot-nuc" = "protein-nucleic \nacid complex",
                               "nuc" = "nucleic acid")) +
-  scale_fill_discrete(name = "Molecule type",
-                      breaks = mol_levels,
-                      labels = c("protein", 
-                                 "protein-nucleic \nacid complex", 
-                                 "nucleic acid")) +
+  scale_fill_brewer(palette = "Set1",
+                    name = "Molecule type",
+                    breaks = mol_levels,
+                    labels = c("protein", 
+                               "protein-nucleic \nacid complex", 
+                               "nucleic acid")) +
   theme_linedraw() +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_blank(),
