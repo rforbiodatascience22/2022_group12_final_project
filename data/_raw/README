@@ -1,0 +1,16 @@
+##################
+## Introduction ##
+##################
+
+The files in this directory 
+provide a mapping between the accession.version from
+a nucleotide, protein, WGS or TSA sequence record and a taxonomy ID (taxid) from
+the NCBI Taxonomy database (http://www.ncbi.nlm.nih.gov/taxonomy/).
+
+Please do not attempt to view the files with a web browser since they contain 
+millions of lines.
+
+
+=======================
+Files in this directory
+=======================
