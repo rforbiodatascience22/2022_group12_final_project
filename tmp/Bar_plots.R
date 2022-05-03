@@ -64,55 +64,55 @@ experiment_type_plot <- pdb_entries_aug %>%
 experiment_type_plot
 
 
-#Plot for source needs more cleaning 
+#Plot4 - Distribution of entries based on source organism 
 
 source_bar <- pdb_entries_aug %>% 
-              mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
-                     SOURCE = str_match(SOURCE, "[\\w]+")[,1]) %>% #str_replace('SOURCE', "; ", "") %>% 
+              #mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
+               #      SOURCE = str_match(SOURCE, "[\\w]+")[,1]) %>% 
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
               top_n(10) %>% 
               mutate(REORDERED = reorder(SOURCE, desc(n))) %>%
-ggplot(mapping = aes(x = REORDERED, y = n)) +
-geom_bar(stat = "identity") +
-theme_linedraw() +
-theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+    ggplot(mapping = aes(x = REORDERED, y = n, fill = REORDERED)) +
+    geom_bar(stat = "identity") +
+    geom_label(aes(label = n), 
+             show.legend = FALSE) +
+    theme_linedraw() +
+    scale_x_discrete(labels = c("HOMO" = "HOMO SAPIENS",
+                                "ESCHERICHIA" = "ESCHERICHIA COLI",
+                                "MUS" = "MUS MUSCULUS",
+                                "")) +
+    scale_fill_brewer(palette = "Set1") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 
 source_bar
 
 
-pdb_entries_aug %>% 
-isthisworking <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
-                                            SOURCE = str_match_all SOURCE, "[\w]", ""))
-#pdb_entries_aug %>%  mutate(SOURCE = str_match(SOURCE,"[:;:]+")[, 1])
-      # scop_reference = str_match(scop_reference, "[\\d]+")[, 1])
-
-#try2 <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE
 
 
+  isthisworking <- pdb_entries_aug %>% 
+                   mutate(SOURCE = str_match(SOURCE, "[\\w]+")[,1], 
+                          SOURCE = str_replace_all(SOURCE, "[:punct:]", ""))
 
-#Duumy plot 
-pdb_entries_aug %>% 
-  drop_na(`MOLECULE TYPE`) %>% 
-  group_by(`MOLECULE TYPE`) %>%
-  summarise(`MOLECULE TYPE` = n()) %>% 
-  #filter(`MOLECULE TYPE` != "other") %>% 
-  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
-  #arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
-  ggplot(mapping = aes(x = reorder(`MOLECULE TYPE`, `MOLECULE TYPE`))) +  #, fill = `MOLECULE TYPE`)) +
-  geom_bar() + 
-  theme_linedraw() +
-  labs(title = "Distribution of Structures by Entity Type",
-       x = "Entity Type",
-       y = "")
+tryagain6 <- pdb_entries_aug %>% 
+            mutate(SOURCE = str_match(SOURCE, "[\\w]+")[,1],
+                   SOURCE = str_replace_all(SOURCE, "[:punct:]", "",
+                   SOURCE = str_replace_all(SOURCE, "["))
+                   
+stringmatch <- pdb_entries_aug %>% 
+               mutate(SOURCE = str_match(SOURCE, ";"))
+strungreplace <- pdb_entries_aug %>% 
+                 mutate(SOURCE = str_replace(SOURCE, ";", ""))
 
-pdb_entries_aug %>%  ggplot(mapping = 
-  aes(
-      x = `MOLECULE TYPE`, y = n)) +
-  geom_bar(stat = "identity")+
-  coord_flip()
+finaltry <- pdb_entries_aug %>% 
+            mutate(stringr::str_replace(SOURCE, "(?s) .*", ""))
+
+source_sep <- pdb_entries_aug %>% select(SOURCE)
+  
+pleasework <- gsub(";.*", "", source_sep) %>% 
+  top_n(10)
 
 
-pdb_entries_aug %>% count(`MOLECULE TYPE`)
+Work <- as_tibble(pleasework)
