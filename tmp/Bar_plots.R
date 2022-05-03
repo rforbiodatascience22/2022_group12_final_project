@@ -43,18 +43,25 @@ accession_year_plot
 
 
 
-
 #Plot3 - Distribution of structures based on Experiment Type
-experiment_bar <- pdb_entries_aug %>% 
-  drop_na('EXPERIMENT TYPE (IF NOT X-RAY)') %>%  
-  ggplot(mapping = aes(y = 'EXPERIMENT TYPE (IF NOT X-RAY)')) +
-  geom_bar() +
+experiment_type_plot <- pdb_entries_aug %>% 
+                  group_by(`EXPERIMENT TYPE`) %>% 
+                  drop_na(`EXPERIMENT TYPE`) %>%  
+                  summarise(n = n()) %>% 
+                  top_n(3) %>% 
+  mutate(REORDERED = reorder(`EXPERIMENT TYPE`, desc(n))) %>%
+  ggplot(mapping = aes(x = REORDERED, y = n, fill = `EXPERIMENT TYPE`)) +
+  geom_bar(stat = "identity") +
+  geom_label(aes(label = n), 
+             show.legend = FALSE) +
   theme_linedraw() + 
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer (palette = "Set1") +
   labs(title = "Distribution of Structures based on Experiment type",
-       x = "",
-       y = "Experiment type")
+       x = "Experiment type",
+       y = "Number of entries")
 
-experiment_bar 
+experiment_type_plot
 
 
 #Plot for source needs more cleaning 
@@ -69,14 +76,12 @@ source_bar <- pdb_entries_aug %>%
               mutate(REORDERED = reorder(SOURCE, desc(n))) %>%
 ggplot(mapping = aes(x = REORDERED, y = n)) +
 geom_bar(stat = "identity") +
-theme_minimal() +
+theme_linedraw() +
 theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 
 source_bar
 
-install.packages("wesanderson")
-library(wesanderson)
 
 pdb_entries_aug %>% 
 isthisworking <- pdb_entries_aug %>% mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
