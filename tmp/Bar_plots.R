@@ -1,25 +1,27 @@
-#Let's try this again
-#protein <- str_replace(pdb_entries_clean$'MOLECULE TYPE', "prot", "PROTEIN")
- #          pdb_entries_clean$'MOLECULE TYPE' <- protein
-#nucleotide <- str_replace(pdb_entries_clean$'MOLECULE TYPE', "nuc", "NUCLEOTIDE")
- #             pdb_entries_clean$'MOLECULE TYPE' <- nucleotide
-
 #Plot 1 - Entity type bar plot
-molecule_bar <- pdb_entries_aug %>% 
-                drop_na(`MOLECULE TYPE`) %>% 
-  group_by(`MOLECULE TYPE`) %>%
-  #summarise(`MOLECULE TYPE` = n()) %>% 
-  filter(`MOLECULE TYPE` != "other") %>% 
-  #mutate(`Entity Type` = reorder(`MOLECULE TYPE`, 
-  arrange(desc(`MOLECULE TYPE`)) %>%  #, desc(`MOLECULE TYPE`)
-  ggplot(mapping = aes(x = `MOLECULE TYPE`, fill = `MOLECULE TYPE`)) +
-  geom_bar() + 
+entity_type_plot <- pdb_entries_aug %>%
+                filter(`MOLECULE TYPE` != "other") %>%
+                group_by(`MOLECULE TYPE`)  %>% 
+                drop_na(`MOLECULE TYPE`) %>%
+                count() %>% 
+  ggplot(mapping = aes(x = `MOLECULE TYPE`, y = n, fill = `MOLECULE TYPE`)) +
+  geom_col() + 
+  geom_label(aes(label = n), 
+             show.legend = FALSE) +
+  scale_x_discrete(limits = c("prot", "prot-nuc", "nuc"), 
+                   labels = c("prot" = "Protein", 
+                              "prot-nuc" = "Protein-Nucleotide",
+                              "nuc" = "Nucleotide")) + 
   theme_linedraw() +
+  scale_fill_brewer(labels = c("Nucleotide", 
+                               "Protein", 
+                               "Protein-Nucleotide"), 
+                                palette = "Set1") +
   labs(title = "Distribution of Structures by Entity Type",
        x = "Entity Type",
-       y = "")
+       y = "Number of entries")
 
-molecule_bar
+entity_type
 
 #Plot2 - Distribution of structures based on entry year
 accession_year_bar <- pdb_entries_aug %>% 
