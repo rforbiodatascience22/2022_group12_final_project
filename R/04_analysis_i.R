@@ -109,8 +109,7 @@ pdb_taxa_mol %>%
         axis.ticks.x = element_blank()) +
   labs(title = "Molecule Type Distribution By Superkingdom",
        x = "",
-       y = "Number of entries",
-       fill = "Molecule type")
+       y = "Number of entries")
 
 ggsave(filename = "results/pdb_taxa_mol.png",
        height = 5,
