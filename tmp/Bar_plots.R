@@ -21,20 +21,28 @@ entity_type_plot <- pdb_entries_aug %>%
        x = "Entity Type",
        y = "Number of entries")
 
-entity_type
+entity_type_plot
+
+
+
 
 #Plot2 - Distribution of structures based on entry year
-accession_year_bar <- pdb_entries_aug %>% 
+accession_year_plot <- pdb_entries_aug %>% 
+                      group_by(YEAR) %>% 
                       drop_na(YEAR) %>% 
-  ggplot(mapping = aes(x = YEAR)) +
-  geom_bar() +
+                      count() %>% 
+  ggplot(mapping = aes(x = YEAR, y = n, fill = YEAR)) +
+  geom_col() +
   theme_linedraw() + 
   theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
   labs(title = "Distribution of Structures by Year of Entry into PDB",
-       x = "Accession year",
-       y = "")
+       x = "Year of entry",
+       y = "Number of entries")
 
-accession_year_bar  
+accession_year_plot 
+
+
+
 
 #Plot3 - Distribution of structures based on Experiment Type
 experiment_bar <- pdb_entries_aug %>% 
