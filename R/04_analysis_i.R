@@ -17,7 +17,7 @@ pdb_entries_aug <- read_tsv(file = "data/03_dat_augment.tsv")
 
 # Select superkingdom and molecule type columns, then tidy
 taxonomy_df <- pdb_entries_aug %>% 
-  select(IDCODE, SUPERKINGDOM, `MOLECULE TYPE`) %>% 
+  select(IDCODE, SUPERKINGDOM, `MOLECULE TYPE`, SCOP_NAME) %>% 
   replace_na(list(SUPERKINGDOM = "Unclassified"))
 
 # Count number of entries per superkingdom
@@ -26,7 +26,6 @@ pdb_taxonomy <- taxonomy_df %>%
   add_tally(name = "n",
             sort = TRUE) %>% 
   distinct(SUPERKINGDOM, n)
-pdb_taxonomy
 
 # Count number of entries per superkingdom stratified by molecule type
 pdb_taxa_mol <- taxonomy_df %>% 
@@ -36,10 +35,14 @@ pdb_taxa_mol <- taxonomy_df %>%
   filter(`MOLECULE TYPE` != "other") %>% 
   drop_na(`MOLECULE TYPE`) %>% 
   arrange(SUPERKINGDOM)
-pdb_taxa_mol
 
-# Model data
-# my_data_clean_aug %>% ...
+# Count number of entries per superkingdom stratified by SCOP class
+pdb_taxa_scop <- taxonomy_df %>% 
+  group_by(SUPERKINGDOM, SCOP_NAME) %>% 
+  add_tally(name = "n") %>% 
+  distinct(SUPERKINGDOM, SCOP_NAME, n) %>% 
+  drop_na(SCOP_NAME) %>% 
+  arrange(SUPERKINGDOM)
 
 
 # Visualise data ----------------------------------------------------------
@@ -59,6 +62,13 @@ taxa_levels = c("Eukaryota",
 mol_levels = c("prot", 
                "prot-nuc", 
                "nuc")
+
+# Store scop class levels to use in plots
+scop_levels <- c("All alpha proteins",
+                 "All beta proteins",
+                 "Alpha and beta proteins (a/b)", 
+                 "Alpha and beta proteins (a+b)",
+                 "Small proteins")
 
 # Plot PDB Data Distribution By Superkingdom
 pdb_taxonomy %>% 
@@ -109,13 +119,45 @@ pdb_taxa_mol %>%
         axis.ticks.x = element_blank()) +
   labs(title = "Molecule Type Distribution By Superkingdom",
        x = "",
-       y = "Number of entries",
-       fill = "Molecule type")
+       y = "Number of entries")
 
 ggsave(filename = "results/pdb_taxa_mol.png",
        height = 5,
        width = 7)
 
-# Write data --------------------------------------------------------------
-#write_tsv(...)
-#ggsave(...)
+# Plot SCOP Classification Distribution By Superkingdom
+pdb_taxa_scop %>% 
+  ggplot(mapping = aes(x = factor(SCOP_NAME,
+                                  level = scop_levels),
+                       y = n,
+                       fill = SCOP_NAME)) +
+  geom_col() +
+  geom_label(aes(label = n),
+             show.legend = FALSE) +
+  facet_wrap(~factor(SUPERKINGDOM,
+                     levels = taxa_levels)) +
+  ylim(0, 6000) +
+  scale_x_discrete(labels = c("All alpha proteins" = "all-α",
+                              "All beta proteins" = "all-β",
+                              "Alpha and beta proteins (a/b)" = "α/β", 
+                              "Alpha and beta proteins (a+b)" = "α+β",
+                              "Small proteins" = "small")) +
+  scale_fill_brewer(palette = "Set1",
+                    name = "SCOP Classification",
+                    breaks = scop_levels,
+                    labels = c("all-α",
+                               "all-β",
+                               "α/β",
+                               "α+β",
+                               "small")) +
+  theme_linedraw() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
+  labs(title = "SCOP Classification Distribution By Superkingdom",
+       x = "",
+       y = "Number of entries")
+
+ggsave(filename = "results/pdb_taxa_scop.png",
+       height = 5,
+       width = 9)
