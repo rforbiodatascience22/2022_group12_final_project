@@ -24,8 +24,8 @@ pdb_entry_type_tsv <- read_tsv(file = "data/_raw/pdb_entry_type.txt",
                                              "MOLECULE TYPE", 
                                              "EXPERIMENT TYPE"))
 
-# Load pdb.accession2taxid
-taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid")
+# Load pdb.accession2taxid.txt
+taxid_pdb <- read_tsv(file = "data/_raw/pdb.accession2taxid.txt")
 
 # Load taxonomy.tsv
 taxonomy_taxid <- read_delim(file = "data/_raw/rankedlineage.tsv.gz",

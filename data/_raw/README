@@ -27,13 +27,23 @@ List of all PDB entries, identification of each as a protein, nucleic acid, or p
 # NCBI #
 --------
 
-- pdb.accession2taxid
+- pdb.accession2taxid.txt
 TaxID mapping for live protein sequence records which have PDB identifiers.
 Link: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/
 
-- 
+- rankedlineage.tsv.gz
 Select ancestor names for well-established taxonomic ranks (species, genus, family, order, class, phylum, kingdom, superkingdom).
-Link: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/  (The file is inside the directory)
+Link: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/
+How to get the file:
+  1. Download the compressed new_taxdump directory
+  2. Extract the file rankedlineage.dmp from the directory
+  3. Write the file in a compressed format. The following was used in this project:
+  
+    taxa_raw <- read_delim(file = "data/_raw/rankedlineage.dmp",
+                           delim = "\t|\t")
+    write_delim(taxa_raw,
+                file = "data/_raw/rankedlineage.tsv.gz",
+                delim = "|")
 
 
 --------
