@@ -2,17 +2,47 @@
 ## Introduction ##
 ##################
 
-The files in this directory 
-provide a mapping between the accession.version from
-a nucleotide, protein, WGS or TSA sequence record and a taxonomy ID (taxid) from
-the NCBI Taxonomy database (http://www.ncbi.nlm.nih.gov/taxonomy/).
+The files in this directory contain the raw data used for the project. They were extracted form three different databases: Protein Data Bank (PDB), National Center for Biotechnology Information (NCBI) and Structural Classification Of Proteins (SCOP).
 
-Please do not attempt to view the files with a web browser since they contain 
-millions of lines.
+All files were downloaded on 03/05/2022.
+
+#############################
+## Files in this directory ##
+#############################
 
 
-=======================
-Files in this directory
-=======================
-write here sources of files and date of download...
+-------
+# PDB #
+-------
+Link: https://www.wwpdb.org/ftp/pdb-ftp-sites
 
+- entries.idx
+List of all PDB ID codes, header accession date, compound, source, author list, resolution and experiment type (if not X-ray).
+
+- pdb_entry_type.txt
+List of all PDB entries, identification of each as a protein, nucleic acid, or protein-nucleic acid complex and whether the structure was determined by diffraction or NMR.
+
+
+--------
+# NCBI #
+--------
+
+- pdb.accession2taxid
+TaxID mapping for live protein sequence records which have PDB identifiers.
+Link: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/
+
+- 
+Select ancestor names for well-established taxonomic ranks (species, genus, family, order, class, phylum, kingdom, superkingdom).
+Link: https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/  (The file is inside the directory)
+
+
+--------
+# SCOP #
+--------
+Link: http://scop.mrc-lmb.cam.ac.uk/download
+
+- scop-cla.txt
+SCOP domain definitions and classification.
+
+- scop-description.txt
+SCOP node descriptions.
