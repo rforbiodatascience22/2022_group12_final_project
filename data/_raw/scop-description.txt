@@ -1,8 +1,8 @@
-# SCOP release 2022-03-30
+# SCOP release 2022-04-29
 # http://scop.mrc-lmb.cam.ac.uk
-# based on PDB release 2022-03-18
+# based on PDB release 2022-04-22
 # based on UniProt realese 2022-03-02
-# based on SIFTS release 2022-03-19
+# based on SIFTS release 2022-04-25
 # NODE_ID NODE_NAME
 1 Globular proteins
 2 Membrane proteins
@@ -1590,6 +1590,7 @@
 2001645 LCI-like
 2001646 Lpg2210  C-terminal domain-like
 2001647 Leg1-like
+2001648 Tyrosinase-specific caddie protein-like
 3000001 Homeodomain-like
 3000002 GroES-like
 3000003 Succinyl-CoA synthetase domain-like
@@ -4401,6 +4402,7 @@
 3002867 ATP11-like
 3002868 Leg1-like
 3002869 Psb27-like
+3002870 Tyrosinase-specific caddie protein-like
 4000004 Aminoacid dehydrogenase-like
 4000005 Potassium channel NAD-binding domain
 4000007 SWIRM domain
@@ -9613,6 +9615,7 @@
 4005862 CpeT/CpcT-like
 4005875 VACV protein N1-like
 4005880 HUS domain-like
+4005881 Tyrosinase co-factor MelC1-like
 4005882 T6SS-like
 4005885 Protein translocase subunit SecE-like
 4005889 Trimethylamine methyltransferase MTTB
@@ -10329,3 +10332,5 @@
 4007840 CigR-like
 4007841 HHM C-terminal domain-like
 4007842 Proton-activated chloride channel TMEM206-like
+4007843 Centrosomal protein CEP44-like
+4007844 SPD2 domain-like
