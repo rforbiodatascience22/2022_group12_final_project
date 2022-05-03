@@ -37,7 +37,7 @@ pdb_taxa_mol <- taxonomy_df %>%
   arrange(SUPERKINGDOM)
 
 # Count number of entries per superkingdom stratified by SCOP class
-pdb_taxa_scop <- pdb_entries_aug %>% 
+pdb_taxa_scop <- taxonomy_df %>% 
   group_by(SUPERKINGDOM, SCOP_NAME) %>% 
   add_tally(name = "n") %>% 
   distinct(SUPERKINGDOM, SCOP_NAME, n) %>% 
