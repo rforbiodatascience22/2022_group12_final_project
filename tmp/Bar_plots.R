@@ -67,12 +67,12 @@ experiment_type_plot
 #Plot4 - Distribution of entries based on source organism 
 
 source_bar <- pdb_entries_aug %>% 
-              #mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""), 
-               #      SOURCE = str_match(SOURCE, "[\\w]+")[,1]) %>% 
+              mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""),  
+                     SOURCE = str_match(SOURCE, "^[\\w]+")[,1]) %>% 
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
-              top_n(10) %>% 
+              top_n(5) %>% 
               mutate(REORDERED = reorder(SOURCE, desc(n))) %>%
     ggplot(mapping = aes(x = REORDERED, y = n, fill = REORDERED)) +
     geom_bar(stat = "identity") +
@@ -84,35 +84,11 @@ source_bar <- pdb_entries_aug %>%
                                 "MUS" = "MUS MUSCULUS",
                                 "")) +
     scale_fill_brewer(palette = "Set1") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(title = "Distribution of Structures based on Source Organism",
+       x = "Source Organism",
+       y = "Number of entries", 
+       color = "Source Organism") 
+    
 
 source_bar
-
-
-
-
-  isthisworking <- pdb_entries_aug %>% 
-                   mutate(SOURCE = str_match(SOURCE, "[\\w]+")[,1], 
-                          SOURCE = str_replace_all(SOURCE, "[:punct:]", ""))
-
-tryagain6 <- pdb_entries_aug %>% 
-            mutate(SOURCE = str_match(SOURCE, "[\\w]+")[,1],
-                   SOURCE = str_replace_all(SOURCE, "[:punct:]", "",
-                   SOURCE = str_replace_all(SOURCE, "["))
-                   
-stringmatch <- pdb_entries_aug %>% 
-               mutate(SOURCE = str_match(SOURCE, ";"))
-strungreplace <- pdb_entries_aug %>% 
-                 mutate(SOURCE = str_replace(SOURCE, ";", ""))
-
-finaltry <- pdb_entries_aug %>% 
-            mutate(stringr::str_replace(SOURCE, "(?s) .*", ""))
-
-source_sep <- pdb_entries_aug %>% select(SOURCE)
-  
-pleasework <- gsub(";.*", "", source_sep) %>% 
-  top_n(10)
-
-
-Work <- as_tibble(pleasework)
