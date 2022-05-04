@@ -79,7 +79,7 @@ pdb_taxonomy %>%
   geom_col() +
   geom_label(aes(label = n),
              show.legend = FALSE) +
-  scale_y_continuous(breaks = seq(0,120000,10000)) +
+  scale_y_continuous(breaks = seq(0,140000,10000)) +
   scale_fill_brewer(palette = "Set1",
                     breaks = taxa_levels) +
   theme_linedraw() +
@@ -90,7 +90,8 @@ pdb_taxonomy %>%
        fill = "Superkingdom")
 
 ggsave(filename = "results/pdb_taxonomy.png",
-       width = 5.5)
+       height = 3,
+       width = 5)
 
 # Plot Molecule Type Distribution By Superkingdom
 pdb_taxa_mol %>% 

@@ -17,7 +17,6 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 pdb_entries_clean <- pdb_entries %>% 
   select(-c(`AUTHOR LIST`,
             `EXPERIMENT TYPE`,
-            RESOLUTION,
             taxid,
             scop_reference)) %>% 
   rename(`EXPERIMENT TYPE` = 6)
