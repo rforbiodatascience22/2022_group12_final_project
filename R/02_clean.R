@@ -19,7 +19,8 @@ pdb_entries_clean <- pdb_entries %>%
             `EXPERIMENT TYPE`,
             taxid,
             scop_reference)) %>% 
-  rename(`EXPERIMENT TYPE` = 6)
+  rename(`EXPERIMENT TYPE` = 7)
+
 
 
 # Write data --------------------------------------------------------------
