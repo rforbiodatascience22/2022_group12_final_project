@@ -21,7 +21,9 @@ pdb_entries_clean <- pdb_entries %>%
             scop_reference)) %>% 
   rename(`EXPERIMENT TYPE` = 7)
 
-
+# Transform RESOLUTION data type (char to double)
+pdb_entries_clean <- pdb_entries_clean %>% 
+  mutate(RESOLUTION = as.double(RESOLUTION))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_clean,
