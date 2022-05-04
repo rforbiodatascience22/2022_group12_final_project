@@ -17,7 +17,7 @@ pdb_entries_aug <- pdb_entries_clean %>%
   select(-`ACCESSION DATE`)
 
 #Create resolution type variable
-pdb_entries_clean %>% 
+pdb_entries_aug <- pdb_entries_aug %>% 
   mutate(RESOL_TYPE = case_when(RESOLUTION < 2 ~ "high",
                                 RESOLUTION >= 2 ~ "low"))
 
