@@ -1,23 +1,27 @@
 # over the entire time
 pdb_entries_aug %>%
-  group_by(`ACCESSION DATE`) %>%
+  group_by(YEAR) %>%
   drop_na() %>%
-  arrange(`ACCESSION DATE`) %>%
+  arrange(YEAR) %>%
   count() %>%
-  ggplot(mapping = aes(x = `ACCESSION DATE`, y = log(n))) +
+  ggplot(mapping = aes(x = YEAR, y = log(n))) +
   geom_point() +
-  geom_smooth(mapping = aes(x = `ACCESSION DATE`, y = log(n)), method=lm) +
+  geom_smooth(mapping = aes(x = YEAR, 
+                            y = log(n),
+                            fill = 'Set1'), method=lm) +
   theme_minimal()
 
 # boom phase
 pdb_entries_aug %>%
-  group_by(`ACCESSION DATE`) %>%
+  group_by(YEAR) %>%
   drop_na() %>%
-  filter(`ACCESSION DATE` > 1985) %>%
-  filter(`ACCESSION DATE` < 2005) %>%
-  arrange(`ACCESSION DATE`) %>%
+  filter(YEAR > 1985) %>%
+  filter(YEAR < 2005) %>%
+  arrange(YEAR) %>%
   count() %>%
-  ggplot(mapping = aes(x = `ACCESSION DATE`, y = log(n))) +
+  ggplot(mapping = aes(x = YEAR, 
+                       y = log(n),
+                       fill = 'Set1')) +
   geom_point() +
-  geom_smooth(mapping = aes(x = `ACCESSION DATE`, y = log(n)), method=lm) +
+  geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
   theme_minimal()
