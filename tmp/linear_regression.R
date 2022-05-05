@@ -11,7 +11,9 @@ pdb_entries_aug %>%
                             fill = 'Set1'), method=lm) +
   theme_minimal()
 
-# boom phase
+ggsave(filename = "results/entries_over_time.png")
+
+# exponential phase
 pdb_entries_aug %>%
   group_by(YEAR) %>%
   drop_na() %>%
@@ -25,3 +27,5 @@ pdb_entries_aug %>%
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
   theme_minimal()
+
+ggsave(filename = "results/entries_over_time_exp.png")

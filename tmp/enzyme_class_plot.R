@@ -12,3 +12,5 @@ pdb_entries_aug %>%
   geom_bar(stat = "identity") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+
+ggsave(filename = "results/enzyme_classes.png")
