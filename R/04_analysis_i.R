@@ -162,3 +162,52 @@ pdb_taxa_scop %>%
 ggsave(filename = "results/pdb_taxa_scop.png",
        height = 5,
        width = 9)
+
+# over the entire time
+pdb_entries_aug %>%
+  group_by(YEAR) %>%
+  drop_na() %>%
+  arrange(YEAR) %>%
+  count() %>%
+  ggplot(mapping = aes(x = YEAR, y = log(n))) +
+  geom_point() +
+  geom_smooth(mapping = aes(x = YEAR, 
+                            y = log(n),
+                            fill = 'Set1'), method=lm) +
+  theme_minimal()
+
+ggsave(filename = "results/entries_over_time.png")
+
+# exponential phase
+pdb_entries_aug %>%
+  group_by(YEAR) %>%
+  drop_na() %>%
+  filter(YEAR > 1985) %>%
+  filter(YEAR < 2005) %>%
+  arrange(YEAR) %>%
+  count() %>%
+  ggplot(mapping = aes(x = YEAR, 
+                       y = log(n),
+                       fill = 'Set1')) +
+  geom_point() +
+  geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
+  theme_minimal()
+
+ggsave(filename = "results/entries_over_time_exp.png")
+
+# arranging the bars does not work
+pdb_entries_aug %>% 
+  group_by(HEADER) %>% 
+  drop_na() %>%
+  filter(HEADER != 'STRUCTURAL GENOMICS, UNKNOWN FUNCTION') %>%
+  summarise(n = n()) %>% 
+  top_n(10) %>% 
+  mutate(enzyme_class = reorder(HEADER, desc(n))) %>%
+  ggplot(aes(x = enzyme_class, 
+             y = n,
+             fill = 'Set1'))  +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+
+ggsave(filename = "results/enzyme_classes.png")
