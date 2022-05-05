@@ -66,9 +66,11 @@ experiment_type_plot
 
 #Plot4 - Distribution of entries based on source organism 
 
+
+
 source_bar <- pdb_entries_aug %>% 
-              mutate(SOURCE = str_replace_all(SOURCE, "[:punct:]", ""),  
-                     SOURCE = str_match(SOURCE, "^[\\w]+")[,1]) %>% 
+              mutate(SOURCE = str_replace_all(SOURCE, "\\;[\\w\\s]+", ""),  
+                     SOURCE = str_match(SOURCE, "^[\\w\\s]+")[,1]) %>%  
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
@@ -90,5 +92,4 @@ source_bar <- pdb_entries_aug %>%
        y = "Number of entries", 
        color = "Source Organism") 
     
-
 source_bar
