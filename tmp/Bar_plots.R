@@ -74,7 +74,7 @@ source_bar <- pdb_entries_aug %>%
               group_by(SOURCE) %>%
               drop_na() %>% 
               summarise(n = n()) %>% 
-              top_n(5) %>% 
+              top_n(9) %>% 
               mutate(REORDERED = reorder(SOURCE, desc(n))) %>%
     ggplot(mapping = aes(x = REORDERED, y = n, fill = REORDERED)) +
     geom_bar(stat = "identity") +
