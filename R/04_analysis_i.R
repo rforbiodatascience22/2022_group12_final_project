@@ -211,3 +211,96 @@ pdb_entries_aug %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 
 ggsave(filename = "results/enzyme_classes.png")
+
+#Plot 1 - Entity type bar plot
+pdb_entries_aug %>%
+  filter(`MOLECULE TYPE` != "other") %>%
+  group_by(`MOLECULE TYPE`)  %>% 
+  drop_na(`MOLECULE TYPE`) %>%
+  count() %>% 
+  ggplot(mapping = aes(x = `MOLECULE TYPE`, y = n, fill = `MOLECULE TYPE`)) +
+  geom_col() + 
+  geom_label(aes(label = n), 
+             show.legend = FALSE) +
+  scale_x_discrete(limits = c("prot", "prot-nuc", "nuc"), 
+                   labels = c("prot" = "Protein", 
+                              "prot-nuc" = "Protein-Nucleotide",
+                              "nuc" = "Nucleotide")) + 
+  theme_linedraw() +
+  scale_fill_brewer(labels = c("Nucleotide", 
+                               "Protein", 
+                               "Protein-Nucleotide"), 
+                    palette = "Set1") +
+  labs(title = "Distribution of Structures by Entity Type",
+       x = "Entity Type",
+       y = "Number of entries")
+
+ggsave(filename = "results/entity_type_plot.png")
+
+
+#Plot2 - Distribution of structures based on entry year
+pdb_entries_aug %>% 
+  group_by(YEAR) %>% 
+  drop_na(YEAR) %>% 
+  count() %>% 
+  ggplot(mapping = aes(x = YEAR, y = n, fill = YEAR)) +
+  geom_col() +
+  theme_linedraw() + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+  labs(title = "Distribution of Structures by Year of Entry into PDB",
+       x = "Year of entry",
+       y = "Number of entries")
+
+ggsave(filename = "results/entries_per_year.png")
+
+
+#Plot3 - Distribution of structures based on Experiment Type
+pdb_entries_aug %>% 
+  group_by(`EXPERIMENT TYPE`) %>% 
+  drop_na(`EXPERIMENT TYPE`) %>%  
+  summarise(n = n()) %>% 
+  top_n(3) %>% 
+  mutate(REORDERED = reorder(`EXPERIMENT TYPE`, desc(n))) %>%
+  ggplot(mapping = aes(x = REORDERED, y = n, fill = `EXPERIMENT TYPE`)) +
+  geom_bar(stat = "identity") +
+  geom_label(aes(label = n), 
+             show.legend = FALSE) +
+  theme_linedraw() + 
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer (palette = "Set1") +
+  labs(title = "Distribution of Structures based on Experiment type",
+       x = "Experiment type",
+       y = "Number of entries")
+
+
+ggsave(filename = "results/experiment_type.png")
+
+#Plot4 - Distribution of entries based on source organism 
+
+
+
+pdb_entries_aug %>% 
+  mutate(SOURCE = str_replace_all(SOURCE, "\\;[\\w\\s]+", ""),  
+         SOURCE = str_match(SOURCE, "^[\\w\\s]+")[,1]) %>%  
+  group_by(SOURCE) %>%
+  drop_na() %>% 
+  summarise(n = n()) %>% 
+  top_n(9) %>% 
+  mutate(REORDERED = reorder(SOURCE, desc(n))) %>%
+  ggplot(mapping = aes(x = REORDERED, y = n, fill = REORDERED)) +
+  geom_bar(stat = "identity") +
+  geom_label(aes(label = n), 
+             show.legend = FALSE) +
+  theme_linedraw() +
+  scale_x_discrete(labels = c("HOMO" = "HOMO SAPIENS",
+                              "ESCHERICHIA" = "ESCHERICHIA COLI",
+                              "MUS" = "MUS MUSCULUS",
+                              "")) +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Distribution of Structures based on Source Organism",
+       x = "Source Organism",
+       y = "Number of entries", 
+       color = "Source Organism") 
+
+ggsave(filename = "results/source.png")
