@@ -343,4 +343,5 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-ggsave(filename = "results/pdb_scop.png")
+ggsave(filename = "results/pdb_scop.png",
+       width = 6)
