@@ -17,11 +17,13 @@ pdb_entries <- read_tsv(file = "data/01_dat_load.tsv",
 pdb_entries_clean <- pdb_entries %>% 
   select(-c(`AUTHOR LIST`,
             `EXPERIMENT TYPE`,
-            RESOLUTION,
             taxid,
             scop_reference)) %>% 
-  rename(`EXPERIMENT TYPE` = 6)
+  rename(`EXPERIMENT TYPE` = 7)
 
+# Transform RESOLUTION data type (char to double)
+pdb_entries_clean <- pdb_entries_clean %>% 
+  mutate(RESOLUTION = as.double(RESOLUTION))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_clean,
