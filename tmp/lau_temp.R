@@ -1,10 +1,4 @@
-pdb_entries_aug %>% 
-  #select(IDCODE,RESOLUTION) %>% 
-  #drop_na() %>% 
-  filter(RESOLUTION<2) %>% 
-  count()
-  group_by(`EXPERIMENT TYPE`) %>% 
-  count()
+# SCOP PLOTS ------------------
 
 # SCOP wrangling version 1
 scop_df <- pdb_entries_aug %>% 
@@ -41,7 +35,7 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-#ggsave(filename = "results/pdb_scop1.png")
+ggsave(filename = "results/pdb_scop1.png")
 
 #------------
 
@@ -82,5 +76,43 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-#ggsave(filename = "results/pdb_scop2.png")
+ggsave(filename = "results/pdb_scop2.png")
 
+# RESOLUTION PLOTS ---------------------------------
+
+#Wrangle before resolution boxplot
+exp_type <- pdb_entries_aug %>% 
+  select(IDCODE, `EXPERIMENT TYPE`, RESOLUTION) %>% 
+  group_by(`EXPERIMENT TYPE`) %>% 
+  drop_na(`EXPERIMENT TYPE`, RESOLUTION) %>% 
+  add_tally() %>% 
+  arrange(n) %>% 
+  slice(1:3)
+
+#Boxplot
+exp_type %>% 
+  ggplot(mapping = aes(x = `EXPERIMENT TYPE`,
+                       y = RESOLUTION)) +
+  geom_boxplot()
+
+
+# duplicates
+pdb_entries_aug %>% 
+  select(IDCODE) %>% 
+  distinct() %>% 
+  count()
+
+# -- SCATTER PLOT ---
+
+#Wrangle before resolution scatter plot
+exp_type2 <- pdb_entries_aug %>% 
+  select(IDCODE, `EXPERIMENT TYPE`, RESOLUTION, YEAR) %>% 
+  drop_na(`EXPERIMENT TYPE`, RESOLUTION) 
+
+#Scatter plot
+exp_type2 %>% 
+  ggplot(mapping = aes(x = YEAR,
+                       y = RESOLUTION,
+                       color = `EXPERIMENT TYPE`)) +
+  geom_point() +
+  ylim(0,20)
