@@ -41,11 +41,8 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-<<<<<<< HEAD
-#ggsave(filename = "results/pdb_scop.png")
-=======
-#ggsave(filename = "results/pdb_scop1.png")
->>>>>>> 4ca1438a185669ad5ba216d3cde8c79f7ad3ac8b
+ggsave(filename = "results/scop-class_plot.png")
+
 
 #------------
 
