@@ -177,7 +177,7 @@ pdb_entries_aug %>%
   theme_linedraw()  +
   labs(title = "Number of entries to the RCSB over time",
        x = "Year",
-       y = "Number of entries")
+       y = "log(number of entries)")
 
 ggsave(filename = "results/entries_over_time.png",
        width = 8,
@@ -198,7 +198,7 @@ pdb_entries_aug %>%
   theme_linedraw() +
   labs(title = "Exponential growth phase of entries added to RCSB",
        x = "Year",
-       y = "Number of entries")
+       y = "log(number of entries)")
 
 ggsave(filename = "results/entries_over_time_exp.png",
        width = 8,
