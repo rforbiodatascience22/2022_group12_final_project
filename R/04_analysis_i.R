@@ -212,11 +212,10 @@ pdb_entries_aug %>%
   arrange(YEAR) %>%
   count() %>%
   ggplot(mapping = aes(x = YEAR, 
-                       y = log(n),
-                       fill = 'Set1')) +
+                       y = log(n))) +
   geom_point() +
-  geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
-  theme_linedraw() +
+  geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm, show.legend = F) +
+  theme_linedraw(legend.title=element_blank()) +
   labs(title = "Exponential growth phase of entries added to RCSB",
        x = "Year",
        y = "Number of entries")
