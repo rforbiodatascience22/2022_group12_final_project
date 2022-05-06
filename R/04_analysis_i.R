@@ -174,8 +174,7 @@ pdb_entries_aug %>%
   ggplot(mapping = aes(x = YEAR, y = log(n))) +
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, 
-                            y = log(n),
-                            fill = 'Set1'), method=lm) +
+                            y = log(n)), method=lm) +
   theme_linedraw()  +
   labs(title = "Number of entries to the RCSB over time",
        x = "Year",
@@ -194,8 +193,7 @@ pdb_entries_aug %>%
   arrange(YEAR) %>%
   count() %>%
   ggplot(mapping = aes(x = YEAR, 
-                       y = log(n),
-                       fill = 'Set1')) +
+                       y = log(n))) +
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
   theme_linedraw() +
