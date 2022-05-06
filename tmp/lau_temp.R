@@ -1,6 +1,6 @@
 # SCOP PLOTS ------------------
 
-# SCOP wrangling version 1
+# SCOP wrangling
 scop_df <- pdb_entries_aug %>% 
   filter(`MOLECULE TYPE` != "nuc") %>% 
   select(IDCODE, `MOLECULE TYPE`, SCOP_NAME) %>% 
@@ -8,7 +8,7 @@ scop_df <- pdb_entries_aug %>%
   group_by(SCOP_NAME) %>% 
   count()
   
-#SCOP plot version 1: SIMPLE
+#SCOP plot
 scop_df %>% 
   ggplot(mapping = aes(x = fct_reorder(SCOP_NAME,
                                        desc(n),
@@ -35,7 +35,7 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-ggsave(filename = "results/pdb_scop1.png")
+#ggsave(filename = "results/pdb_scop.png")
 
 #------------
 
@@ -76,7 +76,7 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
-ggsave(filename = "results/pdb_scop2.png")
+#ggsave(filename = "results/pdb_scop2.png")
 
 # RESOLUTION PLOTS ---------------------------------
 
