@@ -264,9 +264,9 @@ pdb_entries_aug %>%
   theme_linedraw() +
   scale_fill_brewer(name = "Molecule Type",
                     breaks = mol_levels,
-                    labels = c("Nucleic Acid", 
-                               "Protein", 
-                               "Protein-Nucleic Acid"), 
+                    labels = c("Protein", 
+                               "Protein-Nucleic Acid", 
+                               "Nucleic Acid"), 
                     palette = "Set1") +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
@@ -334,10 +334,6 @@ pdb_entries_aug %>%
   geom_label(aes(label = n), 
              show.legend = FALSE) +
   theme_linedraw() +
-  scale_x_discrete(labels = c("HOMO" = "HOMO SAPIENS",
-                              "ESCHERICHIA" = "ESCHERICHIA COLI",
-                              "MUS" = "MUS MUSCULUS",
-                              "")) +
   scale_fill_brewer(name = "Source Organism",
                     palette = "Set1") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +

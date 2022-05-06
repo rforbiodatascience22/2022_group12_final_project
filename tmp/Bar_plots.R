@@ -81,15 +81,11 @@ source_bar <- pdb_entries_aug %>%
     geom_label(aes(label = n), 
              show.legend = FALSE) +
     theme_linedraw() +
-    scale_x_discrete(labels = c("HOMO" = "HOMO SAPIENS",
-                                "ESCHERICHIA" = "ESCHERICHIA COLI",
-                                "MUS" = "MUS MUSCULUS",
-                                "")) +
     scale_fill_brewer(palette = "Set1") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     labs(title = "Distribution of Structures based on Source Organism",
        x = "Source Organism",
        y = "Number of entries", 
-       color = "Source Organism") 
+       fill = "Source Organism") 
     
 source_bar
