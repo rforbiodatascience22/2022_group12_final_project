@@ -34,3 +34,12 @@ The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RC
 ## Re-creation of PDB Data Statitics
 
 ![Entries added every year](../results/entries_per_year.png){width=70%}
+
+
+## Re-creation of PDB Data Statitics
+
+![Most common superkingom](../results/pdb_taxonomy.png){width=70%}
+
+## Re-creation of PDB Data Statitics
+
+![Data distribution by SCOP class](../results/scop-class_plot.png){width=70%}
