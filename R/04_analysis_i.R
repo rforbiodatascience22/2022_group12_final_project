@@ -126,7 +126,7 @@ ggsave(filename = "results/pdb_taxa_mol.png",
        height = 5,
        width = 7)
 
-# Plot SCOP Classification Distribution By Superkingdom
+# Plot SCOP Classification Distribution By Superkingdom - Bar
 pdb_taxa_scop %>% 
   ggplot(mapping = aes(x = factor(SCOP_NAME,
                                   level = scop_levels),
@@ -162,6 +162,19 @@ pdb_taxa_scop %>%
 ggsave(filename = "results/pdb_taxa_scop.png",
        height = 5,
        width = 9)
+
+# Plot SCOP Classification Distribution By Superkingdom - Bar
+pdb_taxa_scop %>% 
+  ggplot(mapping = aes(x = nt,
+                       y = SUPERKINGDOM,
+                       fill = SCOP_NAME)) +
+  geom_density_ridges(alpha = 0.5) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(x = "Entry counts",
+       y = "Superkingdom",
+       title = "Distribution of SCOP classes across superkingdoms") +
+  theme_linedraw(base_size = 12) +
+  facet_wrap(vars(SCOP_NAME))
 
 # over the entire time
 pdb_entries_aug %>%
