@@ -36,7 +36,8 @@ scop_pdb <- read_delim(file = "data/_raw/scop-cla.txt",
                        col_names = FALSE,
                        delim = ' ',
                        skip = 6) %>%
-  select(X2, X11)
+  select(X2, X11) %>% 
+  distinct()
 
 # Load scop classes
 scop_ref <- read_delim(file = "data/_raw/scop-description.txt",
@@ -71,7 +72,7 @@ taxid_pdb <- taxid_pdb %>%
 
 # Join taxid_pdb with previous data
 pdb_entries <- pdb_entries %>% 
-  full_join(taxid_pdb,
+  left_join(taxid_pdb,
             by = c("IDCODE" = "accession"))
 
 # Change col_names of taxonomy_taxid
@@ -100,7 +101,7 @@ pdb_entries <- pdb_entries %>%
 
 # Join scop_pdb with previous data
 pdb_entries <- pdb_entries %>% 
-  full_join(scop_pdb,
+  left_join(scop_pdb,
             by = "IDCODE")
 
 # Clean SCOP column of data frame in order to be able to join it with scop_ref
