@@ -174,7 +174,7 @@ pdb_entries_aug %>%
   geom_smooth(mapping = aes(x = YEAR, 
                             y = log(n),
                             fill = 'Set1'), method=lm) +
-  theme_minimal()  +
+  theme_linedraw()  +
   labs(title = "Number of entries to the RCSB over time",
        x = "Year",
        y = "Number of entries")
@@ -196,14 +196,16 @@ pdb_entries_aug %>%
                        fill = 'Set1')) +
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
-  theme_minimal() +
+  theme_linedraw() +
   labs(title = "Exponential growth phase of entries added to RCSB",
        x = "Year",
        y = "Number of entries")
 
-ggsave(filename = "results/entries_over_time_exp.png") 
+ggsave(filename = "results/entries_over_time_exp.png",
+       width = 8,
+       height = 5) 
 
-# Box plot of most common enzyme classes in the RCSB
+# Bar plot of most common enzyme classes in the RCSB
 pdb_entries_aug %>% 
   group_by(HEADER) %>% 
   drop_na() %>%
@@ -215,14 +217,17 @@ pdb_entries_aug %>%
              y = n,
              fill = enzyme_class))  +
   geom_bar(stat = "identity") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Most common enzyme classes in the RCSB",
        x = "Enzyme class",
-       y = "Number of entries")
+       y = "Number of entries",
+       fill = "Enzyme class")
 
-ggsave(filename = "results/enzyme_classes.png") 
+ggsave(filename = "results/enzyme_classes.png",
+       width = 6,
+       height = 6) 
 
 #Plot 1 - Entity type bar plot
 pdb_entries_aug %>%
@@ -235,19 +240,23 @@ pdb_entries_aug %>%
   geom_label(aes(label = n), 
              show.legend = FALSE) +
   scale_x_discrete(limits = c("prot", "prot-nuc", "nuc"), 
-                   labels = c("prot" = "Protein", 
-                              "prot-nuc" = "Protein-Nucleotide",
-                              "nuc" = "Nucleotide")) + 
+                   labels = c("prot", "prot-nuc", "nuc")) + 
   theme_linedraw() +
-  scale_fill_brewer(labels = c("Nucleotide", 
+  scale_fill_brewer(name = "Molecule Type",
+                    breaks = mol_levels,
+                    labels = c("Nucleic Acid", 
                                "Protein", 
-                               "Protein-Nucleotide"), 
+                               "Protein-Nucleic Acid"), 
                     palette = "Set1") +
-  labs(title = "Distribution of Structures by Entity Type",
-       x = "Entity Type",
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
+  labs(title = "Distribution of Structures by Molecule Type",
+       x = "Molecule Type",
        y = "Number of entries")
 
-ggsave(filename = "results/entity_type_plot.png")
+ggsave(filename = "results/entity_type_plot.png",
+       width = 6,
+       height = 4)
 
 
 #Plot2 - Distribution of structures based on entry year
@@ -263,7 +272,9 @@ pdb_entries_aug %>%
        x = "Year of entry",
        y = "Number of entries")
 
-ggsave(filename = "results/entries_per_year.png")
+ggsave(filename = "results/entries_per_year.png",
+       width = 7,
+       height = 4)
 
 
 #Plot3 - Distribution of structures based on Experiment Type
@@ -278,19 +289,18 @@ pdb_entries_aug %>%
   geom_label(aes(label = n), 
              show.legend = FALSE) +
   theme_linedraw() + 
-  #theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_brewer (palette = "Set1") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
+  scale_fill_brewer(palette = "Set1") +
   labs(title = "Distribution of Structures based on Experiment type",
        x = "Experiment type",
        y = "Number of entries")
 
+ggsave(filename = "results/experiment_type.png",
+       width = 6,
+       height = 4)
 
-ggsave(filename = "results/experiment_type.png")
-
-#Plot4 - Distribution of entries based on source organism 
-
-
-
+#Plot4 - Distribution of entries based on source organism
 pdb_entries_aug %>% 
   mutate(SOURCE = str_replace_all(SOURCE, "\\;[\\w\\s]+", ""),  
          SOURCE = str_match(SOURCE, "^[\\w\\s]+")[,1]) %>%  
@@ -308,11 +318,13 @@ pdb_entries_aug %>%
                               "ESCHERICHIA" = "ESCHERICHIA COLI",
                               "MUS" = "MUS MUSCULUS",
                               "")) +
-  scale_fill_brewer(palette = "Set1") +
+  scale_fill_brewer(name = "Source Organism",
+                    palette = "Set1") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Distribution of Structures based on Source Organism",
        x = "Source Organism",
-       y = "Number of entries", 
-       color = "Source Organism") 
+       y = "Number of entries") 
 
-ggsave(filename = "results/source.png")
+ggsave(filename = "results/source.png",
+       width = 8,
+       height = 5)
