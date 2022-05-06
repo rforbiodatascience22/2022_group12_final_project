@@ -179,7 +179,9 @@ pdb_entries_aug %>%
        x = "Year",
        y = "Number of entries")
 
-ggsave(filename = "results/entries_over_time.png") 
+ggsave(filename = "results/entries_over_time.png",
+       width = 8,
+       height = 5) 
 
 # exponential phase
 pdb_entries_aug %>%
