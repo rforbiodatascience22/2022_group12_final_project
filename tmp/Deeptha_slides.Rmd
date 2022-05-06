@@ -1,0 +1,36 @@
+---
+title: "Slides-Deeptha"
+output: ioslides_presentation
+date: '2022-05-06'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
+
+- An open archive of experimental 3D structures
+- Estimated 1 Million unique users annually
+
+![PDB Statitics - an example of data distribution found on https://www.rcsb.org/stats/](../tmp/release_date_plot.jpg){width=50%} 
+
+
+
+## Re-creation of PDB Data Statitics
+
+![Most common entity type](../results/entity_type_plot.png){width=70%} 
+
+## Re-creation of PDB Data Statitics
+
+![Most common source organism](../results/source.png){width=70%}
+
+## Re-creation of PDB Data Statitics
+
+![Most common method](../results/experiment_type.png){width=70%}
+
+## Re-creation of PDB Data Statitics
+
+![Entries added every year](../results/entries_per_year.png){width=70%}
