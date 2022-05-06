@@ -164,24 +164,6 @@ ggsave(filename = "results/pdb_taxa_scop.png",
        height = 5,
        width = 9)
 
-# Plot SCOP Classification Distribution By Superkingdom - Density
-pdb_taxa_scop %>%
-  ungroup() %>% 
-  ggplot(mapping = aes(x = n,
-                       y = SCOP_NAME,
-                       fill = SCOP)) +
-  geom_density_ridges(alpha = 0.5) +
-  scale_fill_brewer(palette = "Set1") +
-  labs(x = "Entry counts",
-       y = "Superkingdom",
-       title = "Distribution of SCOP classes between superkingdoms") +
-  theme_minimal() +
-  facet_wrap(vars(SUPERKINGDOM),
-             ncol = 3)
-
-ggsave(filename = "results/temp.png",
-       height = 5,
-       width = 9)
 
 # over the entire time
 pdb_entries_aug %>%
@@ -386,3 +368,27 @@ scop_df %>%
 ggsave(filename = "results/scop-class_plot.png",
        height = 3,
        width = 6)
+
+# Boxplot resolution by experiment type
+pdb_entries_aug %>% 
+  select(IDCODE, RESOLUTION, `EXPERIMENT TYPE`) %>% 
+  filter(RESOLUTION < 5) %>% 
+  drop_na(`EXPERIMENT TYPE`) %>% 
+  ggplot(mapping = aes(x = `EXPERIMENT TYPE`,
+                       y = RESOLUTION,
+                       fill = `EXPERIMENT TYPE`)) +
+  geom_boxplot(alpha = 0.6) +
+  scale_fill_brewer(palette = "Set1") +
+  theme_linedraw() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Experiment type",
+       y = "Resolution (Å)",
+       title = "Resolution stratified by Experiment Type*",
+       caption = "*Nine most common",
+       fill = "Experiment Type")
+
+ggsave(file = "results/resolution_boxplot.png",
+       width = 10,
+       height = 5)
