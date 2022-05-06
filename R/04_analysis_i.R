@@ -258,9 +258,9 @@ pdb_entries_aug %>%
   theme_linedraw() +
   scale_fill_brewer(name = "Molecule Type",
                     breaks = mol_levels,
-                    labels = c("Nucleic Acid", 
-                               "Protein", 
-                               "Protein-Nucleic Acid"), 
+                    labels = c("Protein", 
+                               "Protein-Nucleic Acid", 
+                               "Nucleic Acid"), 
                     palette = "Set1") +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
