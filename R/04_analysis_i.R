@@ -328,10 +328,6 @@ pdb_entries_aug %>%
   geom_label(aes(label = n), 
              show.legend = FALSE) +
   theme_linedraw() +
-  scale_x_discrete(labels = c("HOMO" = "HOMO SAPIENS",
-                              "ESCHERICHIA" = "ESCHERICHIA COLI",
-                              "MUS" = "MUS MUSCULUS",
-                              "")) +
   scale_fill_brewer(name = "Source Organism",
                     palette = "Set1") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
