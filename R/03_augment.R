@@ -16,11 +16,6 @@ pdb_entries_aug <- pdb_entries_clean %>%
   mutate(YEAR = format(as.Date(`ACCESSION DATE`, '%m/%d/%y'), "%Y")) %>%
   select(-`ACCESSION DATE`)
 
-#Create resolution type variable
-pdb_entries_aug <- pdb_entries_aug %>% 
-  mutate(RESOL_TYPE = case_when(RESOLUTION < 2 ~ "high",
-                                RESOLUTION >= 2 ~ "low"))
-
 
 # Write data --------------------------------------------------------------
 write_tsv(x = pdb_entries_aug,
