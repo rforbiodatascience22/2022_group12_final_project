@@ -1,4 +1,10 @@
-# SCOP PLOTS ------------------
+pdb_entries_aug %>% 
+  #select(IDCODE,RESOLUTION) %>% 
+  #drop_na() %>% 
+  filter(RESOLUTION<2) %>% 
+  count()
+  group_by(`EXPERIMENT TYPE`) %>% 
+  count()
 
 # SCOP wrangling
 scop_df <- pdb_entries_aug %>% 
@@ -35,7 +41,11 @@ scop_df %>%
        x = "SCOP class",
        y = "Number of entries",
        fill = "SCOP class")
+<<<<<<< HEAD
 #ggsave(filename = "results/pdb_scop.png")
+=======
+#ggsave(filename = "results/pdb_scop1.png")
+>>>>>>> 4ca1438a185669ad5ba216d3cde8c79f7ad3ac8b
 
 #------------
 
@@ -77,6 +87,7 @@ scop_df %>%
        y = "Number of entries",
        fill = "SCOP class")
 #ggsave(filename = "results/pdb_scop2.png")
+<<<<<<< HEAD
 
 # RESOLUTION PLOTS ---------------------------------
 
@@ -108,11 +119,6 @@ pdb_entries_aug %>%
 exp_type2 <- pdb_entries_aug %>% 
   select(IDCODE, `EXPERIMENT TYPE`, RESOLUTION, YEAR) %>% 
   drop_na(`EXPERIMENT TYPE`, RESOLUTION) 
+=======
+>>>>>>> 4ca1438a185669ad5ba216d3cde8c79f7ad3ac8b
 
-#Scatter plot
-exp_type2 %>% 
-  ggplot(mapping = aes(x = YEAR,
-                       y = RESOLUTION,
-                       color = `EXPERIMENT TYPE`)) +
-  geom_point() +
-  ylim(0,20)

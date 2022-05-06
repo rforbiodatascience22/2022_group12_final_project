@@ -174,9 +174,12 @@ pdb_entries_aug %>%
   geom_smooth(mapping = aes(x = YEAR, 
                             y = log(n),
                             fill = 'Set1'), method=lm) +
-  theme_minimal()
+  theme_minimal()  +
+  labs(title = "Number of entries to the RCSB over time",
+       x = "Year",
+       y = "Number of entries")
 
-ggsave(filename = "results/entries_over_time.png")
+ggsave(filename = "results/entries_over_time.png") 
 
 # exponential phase
 pdb_entries_aug %>%
@@ -191,26 +194,33 @@ pdb_entries_aug %>%
                        fill = 'Set1')) +
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
-  theme_minimal()
+  theme_minimal() +
+  labs(title = "Exponential growth phase of entries added to RCSB",
+       x = "Year",
+       y = "Number of entries")
 
-ggsave(filename = "results/entries_over_time_exp.png")
+ggsave(filename = "results/entries_over_time_exp.png") 
 
-# arranging the bars does not work
+# Box plot of most common enzyme classes in the RCSB
 pdb_entries_aug %>% 
   group_by(HEADER) %>% 
   drop_na() %>%
   filter(HEADER != 'STRUCTURAL GENOMICS, UNKNOWN FUNCTION') %>%
   summarise(n = n()) %>% 
-  top_n(10) %>% 
+  top_n(9) %>% 
   mutate(enzyme_class = reorder(HEADER, desc(n))) %>%
   ggplot(aes(x = enzyme_class, 
              y = n,
-             fill = 'Set1'))  +
+             fill = enzyme_class))  +
   geom_bar(stat = "identity") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Most common enzyme classes in the RCSB",
+       x = "Enzyme class",
+       y = "Number of entries")
 
-ggsave(filename = "results/enzyme_classes.png")
+ggsave(filename = "results/enzyme_classes.png") 
 
 #Plot 1 - Entity type bar plot
 pdb_entries_aug %>%
@@ -304,43 +314,3 @@ pdb_entries_aug %>%
        color = "Source Organism") 
 
 ggsave(filename = "results/source.png")
-
-
-# SCOP PLOTS ------------------
-
-# SCOP wrangling
-scop_df <- pdb_entries_aug %>% 
-  filter(`MOLECULE TYPE` != "nuc") %>% 
-  select(IDCODE, `MOLECULE TYPE`, SCOP_NAME) %>% 
-  drop_na(SCOP_NAME) %>% 
-  group_by(SCOP_NAME) %>% 
-  count()
-
-#SCOP plot
-scop_df %>% 
-  ggplot(mapping = aes(x = fct_reorder(SCOP_NAME,
-                                       desc(n),
-                                       max),
-                       y = n,
-                       fill = SCOP_NAME)) +
-  geom_col() +
-  #geom_label(aes(label = n),
-  #           show.legend = FALSE) +
-  scale_x_discrete(labels = c("Alpha and beta proteins (a+b)" = "α+β",
-                              "Alpha and beta proteins (a/b)" = "α/β",
-                              "All beta proteins" = "all-β", 
-                              "All alpha proteins" = "all-α",
-                              "Small proteins" = "small")) +
-  scale_fill_brewer(palette = "Set1",
-                    breaks = c("Alpha and beta proteins (a+b)",
-                               "Alpha and beta proteins (a/b)",
-                               "All beta proteins", 
-                               "All alpha proteins",
-                               "Small proteins")) +
-  theme_linedraw() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  labs(title = "Distribution of SCOP classes in PDB entries",
-       x = "SCOP class",
-       y = "Number of entries",
-       fill = "SCOP class")
-ggsave(filename = "results/pdb_scop.png")
