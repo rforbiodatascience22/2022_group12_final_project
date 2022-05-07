@@ -10,7 +10,7 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Intoduction
+## Intoduction {.smaller}
 
 - what we want to do?
 - why do we want to do it?
@@ -25,12 +25,15 @@ From raw data to visualizations
 
 ## Results: Bar plots I {.smaller}
 
+Source organism
 
 ## Results: Bar plots II {.smaller}
 
+Superkingdom
 
 ## Results: Bar plots III {.smaller}
 
+SCOP class
 
 ## Results: Further Analysis I {.smaller}
 
@@ -56,8 +59,15 @@ pdb_entries_aug %>%
 ![](../results/resolution_boxplot.png){width=99%} 
 
 ## Results: Further Analysis III {.smaller}
-linear model
 
-## Discussion
+Linear model
+
+## Discussion 
+
+- Just a snapshot
+
+- DB latest version
+
+- Choose join type wisely
 
 ## End
