@@ -342,8 +342,8 @@ scop_df %>%
                        y = n,
                        fill = SCOP_NAME)) +
   geom_col() +
-  #geom_label(aes(label = n),
-  #           show.legend = FALSE) +
+  geom_label(aes(label = n),
+             show.legend = FALSE) +
   scale_x_discrete(labels = c("Alpha and beta proteins (a+b)" = "α+β",
                               "Alpha and beta proteins (a/b)" = "α/β",
                               "All beta proteins" = "all-β", 
