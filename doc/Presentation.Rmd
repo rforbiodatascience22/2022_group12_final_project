@@ -70,4 +70,8 @@ Linear model
 
 - Choose join type wisely
 
-## End
+## Acknowledgments {.smaller}
+
+- TAs
+
+- Online community
