@@ -1,7 +1,8 @@
 ---
 title: "Improving PDB metadata visualizations"
-author: "Group 12: Deeptha Sri, Eric Bautista, Jonathan Funk, Laura Machado"
-date: '2022-05-02'
+subtitle: "Group 12"
+author: "Deeptha S, Eric B, Jonathan F, Laura M"
+date: '2022-05-09'
 output: ioslides_presentation
 ---
 
@@ -15,25 +16,47 @@ knitr::opts_chunk$set(echo = FALSE)
 - why do we want to do it?
 - show the problem (some example plots)
 
-![example of pie chart on the rcsb](example_pdb_piechart.png){width=75%}
+![](example_pdb_piechart.png){width=65%}
 
-## Data
+## Materials and Methods {.smaller}
 
-- show which data we needed based on plots we wanted to do
+From raw data to visualizations
+![](img/R_flowchart.jpg){width=99.9%}
 
-(for example the scop data, and what did we need from there)
+## Results: Bar plots I {.smaller}
 
-## Our bar plots
 
-```{r cars, echo = TRUE}
-summary(cars)
+## Results: Bar plots II {.smaller}
+
+
+## Results: Bar plots III {.smaller}
+
+
+## Results: Further Analysis I {.smaller}
+
+```{r Results_I, echo = TRUE, eval = FALSE}
+pdb_taxa_mol <- taxonomy_df %>%
+  group_by(SUPERKINGDOM, `MOLECULE TYPE`) %>% 
+  add_tally(name = "n") %>% 
+  distinct(SUPERKINGDOM, `MOLECULE TYPE`, n)
 ```
 
-## Slide with Plot
-- Just show the plots, important parts of code and biological/scientific insight
-```{r pressure}
-plot(pressure)
+![](../results/pdb_taxa_scop.png){width=90%} 
+
+
+
+## Results: Further Analysis II {.smaller}
+
+```{r Results_II, echo = TRUE, eval = FALSE}
+pdb_entries_aug %>% 
+  select(IDCODE, RESOLUTION, `EXPERIMENT TYPE`) %>% 
+  filter(RESOLUTION < 5)
 ```
+
+![](../results/resolution_boxplot.png){width=99%} 
+
+## Results: Further Analysis III {.smaller}
+linear model
 
 ## Discussion
 
