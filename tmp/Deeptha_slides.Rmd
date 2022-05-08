@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 -The problem: The data present in the https://www.rcsb.org/stats did not provide the insights we needed for this
 
 
-
+![](../doc/unnamed.gif)
 
 
 ## Re-creation of PDB Data Statitics
