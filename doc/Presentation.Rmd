@@ -1,8 +1,8 @@
 ---
 title: "Improving PDB metadata visualizations"
 subtitle: "Group 12"
-author: "Deeptha S, Eric B, Jonathan F, Laura M"
-date: '2022-05-09'
+author: "Deeptha S., Eric B., Jonathan F., Laura M."
+date: '09/05/2022'
 output: ioslides_presentation
 ---
 
