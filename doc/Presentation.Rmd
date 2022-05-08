@@ -107,6 +107,11 @@ pdb_entries_aug %>%
 
 - Further analysis to account for redundancy
 
+<div class="centered">
+![](../results/pdb_taxonomy.png){width=60%}
+![](img/time_arrow.jpg){width=35%}
+</div>
+
 ## Discussion 
 
 - Successfully improved the PDB metadata visualizations
@@ -132,6 +137,10 @@ pdb_entries_aug %>%
 - Greatest challenge: combining files from different sources
 
 - **Further analysis to account for redundancy**
+
+<div class="centered">
+![](img/redundancy.png){width=40%}
+</div>
 
 ## Acknowledgements {.smaller}
 
