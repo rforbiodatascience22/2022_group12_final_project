@@ -15,9 +15,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## Intoduction {.smaller}
+## Introduction {.smaller}
 
-![AlphaFold](../doc/alphafold.gif){width=90%}
+<div class="centered">
+![](../doc/alphafold.gif){width=90%}
+</div>
 
 ## Intoduction {.smaller}
 
