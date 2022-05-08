@@ -306,11 +306,12 @@ pdb_entries_aug %>%
   geom_bar(stat = "identity") +
   geom_label(aes(label = n), 
              show.legend = FALSE) +
-  theme_linedraw() +
+  theme_linedraw(base_size = 14) +
   scale_fill_brewer(name = "Source Organism",
                     palette = "Set1") +
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) +
+        axis.ticks.x = element_blank(),
+        plot.title = element_text(size = 16)) +
   labs(title = "Distribution of Structures based on Source Organism",
        x = "Source Organism",
        y = "Number of entries") 
