@@ -84,6 +84,8 @@ pdb_entries_aug %>%
 
 3. Greatest challenge: combining files from different sources
 
+4. Further analysis to account for redundancy.
+
 <div class="centered">
 ![](img/logo_pdb.png){width=30%}
 ![](img/logo_ncbi.png){width=15%}
