@@ -85,19 +85,52 @@ pdb_entries_aug %>%
 
 ## Discussion 
 
-1. Successfully improved the PDB metadata visualizations
+- **Successfully improved the PDB metadata visualizations**
 
-2. Database updates compromise reproducibility
+- Database updates compromise reproducibility
 
-3. Greatest challenge: combining files from different sources
+- Greatest challenge: combining files from different sources
 
-4. Further analysis to account for redundancy.
+- Further analysis to account for redundancy
+
+![](img/release_date_plot.jpg){width=45%}
+![](../results/entries_over_time.png){width=50%}
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- **Database updates compromise reproducibility**
+
+- Greatest challenge: combining files from different sources
+
+- Further analysis to account for redundancy
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- Database updates compromise reproducibility
+
+- **Greatest challenge: combining files from different sources**
+
+- Further analysis to account for redundancy
 
 <div class="centered">
 ![](img/logo_pdb.png){width=30%}
 ![](img/logo_ncbi.png){width=15%}
 ![](img/logo_scop.png){width=30%}
 </div>
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- Database updates compromise reproducibility
+
+- Greatest challenge: combining files from different sources
+
+- **Further analysis to account for redundancy**
 
 ## Acknowledgements {.smaller}
 
