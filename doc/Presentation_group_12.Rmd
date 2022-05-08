@@ -1,0 +1,155 @@
+---
+title: "Improving PDB metadata visualizations"
+subtitle: "Group 12"
+author: 
+  - Deeptha Sri - s210230
+  - Eric Bautista - s212514
+  - Jonathan Funk - s212697
+  - Laura Machado - s212775
+date: '09/05/2022'
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Introduction {.smaller}
+
+<div class="centered">
+Exploring the database which was used to train Alphafold2
+![](img/alphafold.gif){width=90%}
+</div>
+
+## Introduction {.smaller}
+
+The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
+
+- An open archive of experimental 3D structures
+- Estimated 1 Million unique users annually
+
+<div class="centered">
+![](img/release_date_plot.jpg){width=50%}
+</div>
+
+## Materials and Methods {.smaller}
+
+From raw data to visualizations
+![](img/R_flowchart.jpg){width=99.9%}
+
+## Results: Bar plots I {.smaller .centered}
+![](img/source_pdb.jpg){width=50%}
+
+![](../results/source.png){width=70%}
+
+## Results: Bar plots II {.smaller .centered}
+
+![](img/superkingdom_pdb.jpg){width=50%}
+![](../results/pdb_taxonomy.png){width=70%}
+
+## Results: Bar plots III {.smaller .centered}
+
+![](img/scop_pdb.jpg){width=60%}
+![](../results/scop-class_plot.png){width=70%}
+
+## Results: Further Analysis I {.smaller}
+
+```{r Results_I, echo = TRUE, eval = FALSE}
+pdb_taxa_mol <- taxonomy_df %>%
+  group_by(SUPERKINGDOM, `MOLECULE TYPE`) %>% 
+  add_tally(name = "n") %>% 
+  distinct(SUPERKINGDOM, `MOLECULE TYPE`, n)
+```
+
+![](../results/pdb_taxa_scop.png){width=90%} 
+
+
+
+## Results: Further Analysis II {.smaller}
+
+```{r Results_II, echo = TRUE, eval = FALSE}
+pdb_entries_aug %>% 
+  select(IDCODE, RESOLUTION, `EXPERIMENT TYPE`) %>% 
+  filter(`EXPERIMENT TYPE` %in% exp_type_levels)
+```
+
+![](../results/resolution_boxplot.png){width=99%} 
+
+## Results: Further Analysis III {.smaller}
+
+- The PDB grew exponentially at first
+- The growth seems to have reached a plateau in the early 2000's
+
+![Linear regression of entries over time](../results/entries_over_time.png){width=49%}
+![Observed exponential growth phase](../results/entries_over_time_exp.png){width=49%}
+
+## Discussion 
+
+- **Successfully improved the PDB metadata visualizations**
+
+- Database updates compromise reproducibility
+
+- Greatest challenge: combining files from different sources
+
+- Further analysis to account for redundancy
+
+![](img/release_date_plot.jpg){width=45%}
+![](../results/entries_over_time.png){width=50%}
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- **Database updates compromise reproducibility**
+
+- Greatest challenge: combining files from different sources
+
+- Further analysis to account for redundancy
+
+<div class="centered">
+![](../results/pdb_taxonomy.png){width=60%}
+![](img/time_arrow.jpg){width=35%}
+</div>
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- Database updates compromise reproducibility
+
+- **Greatest challenge: combining files from different sources**
+
+- Further analysis to account for redundancy
+
+<div class="centered">
+![](img/logo_pdb.png){width=30%}
+![](img/logo_ncbi.png){width=15%}
+![](img/logo_scop.png){width=30%}
+</div>
+
+## Discussion 
+
+- Successfully improved the PDB metadata visualizations
+
+- Database updates compromise reproducibility
+
+- Greatest challenge: combining files from different sources
+
+- **Further analysis to account for redundancy**
+
+<div class="centered">
+![](img/redundancy.png){width=40%}
+</div>
+
+## Acknowledgements {.smaller}
+
+### Acknowledgements
+
+- TAs
+- Online community
+
+### References
+- Pie charts: https://www.rcsb.org/stats/
+- RCSB PDB: https://www.rcsb.org/news/feature/61b8e5e869569d045d35a9a3
+- Alphafold2: https://oecd.ai/fr/wonk/deepminds-alphafold-a-solution-to-challenge-of-protein-folding
