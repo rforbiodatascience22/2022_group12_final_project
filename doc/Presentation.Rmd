@@ -30,11 +30,12 @@ From raw data to visualizations
 
 ## Results: Bar plots II {.smaller}
 
-![Most common superkingom](../results/pdb_taxonomy.png){width=70%}
+![Most common superkingom](../results/pdb_taxonomy.png){width=60%}![Distribution of entries by superkingdom ](../tmp/superkingdom_pdb.jpg){width=40%}
 
 ## Results: Bar plots III {.smaller}
 
-![Data distribution by SCOP class](../results/scop-class_plot.png){width=70%}
+![Data distribution by SCOP class](../results/scop-class_plot.png){width=50%}
+![Distribution of entries by SCOP classes](../tmp/scop_pdb.jpg){width=50%}
 
 ## Results: Further Analysis I {.smaller}
 
