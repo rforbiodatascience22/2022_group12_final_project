@@ -309,14 +309,15 @@ pdb_entries_aug %>%
   theme_linedraw() +
   scale_fill_brewer(name = "Source Organism",
                     palette = "Set1") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
   labs(title = "Distribution of Structures based on Source Organism",
        x = "Source Organism",
        y = "Number of entries") 
 
 ggsave(filename = "results/source.png",
        width = 8,
-       height = 5)
+       height = 4)
 
 ### Distribution of SCOP classes in PDB entries
 scop_df <- pdb_entries_aug %>% 
