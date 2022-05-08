@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <div class="centered">
 Exploring the database which was used to train Alphafold2
-![](../doc/alphafold.gif){width=90%}
+![](img/alphafold.gif){width=90%}
 </div>
 
 ## Introduction {.smaller}
