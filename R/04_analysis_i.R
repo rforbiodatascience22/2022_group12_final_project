@@ -378,9 +378,13 @@ pdb_entries_aug %>%
   ggplot(mapping = aes(x = factor(`EXPERIMENT TYPE`,
                                   levels = exp_type_levels),
                        y = RESOLUTION,
+                       color = `EXPERIMENT TYPE`,
                        fill = `EXPERIMENT TYPE`)) +
-  geom_boxplot(alpha = 0.6) +
+  geom_boxplot(alpha = 0.3) +
   scale_x_discrete(labels = exp_type_levels) +
+  scale_color_brewer(palette = "Set1",
+                    breaks = exp_type_levels,
+                    labels = exp_type_levels) +
   scale_fill_brewer(palette = "Set1",
                     breaks = exp_type_levels,
                     labels = exp_type_levels) +
@@ -388,12 +392,12 @@ pdb_entries_aug %>%
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         plot.title = element_text(hjust = 0.5)) +
-  ylim(0,35) +
   labs(x = "Experiment type",
        y = "Resolution (Å)",
        title = "Resolution stratified by Experiment Type*",
        caption = "*Nine most common",
-       fill = "Experiment Type")
+       fill = "Experiment Type",
+       color = "Experiment Type")
 
 ggsave(file = "results/resolution_boxplot.png",
        width = 10,
