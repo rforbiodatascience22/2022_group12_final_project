@@ -10,12 +10,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Introduction
 
-The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
+-Bioinformatic tools such as AlphaFold has PDB as a source for training the prediction of 3D structures of proteins
 
-- An open archive of experimental 3D structures
-- Estimated 1 Million unique users annually
+-Models with better predictions could be the result of bias from the types of proteins that have been studied extensively
 
-![PDB Statitics - an example of data distribution found on https://www.rcsb.org/stats/](../tmp/release_date_plot.jpg){width=50%} 
+-The problem: The data present in the https://www.rcsb.org/stats did not provide the insights we needed for this
+
+
 
 
 
@@ -47,17 +48,13 @@ The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RC
 
 ![Data distribution by SCOP class](../results/scop-class_plot.png){width=60%}![Distribution of entries by SCOP classes](../tmp/scop_pdb.jpg){width=40%} 
 
+##Introduction 
+
+The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
+
+- An open archive of experimental 3D structures
+- Estimated 1 Million unique users annually
 
 
 
-
-
-##Trial slide
-
-```{r image_grobs, fig.show = "hold", out.width = "50%", fig.align = "default"}
-
-knitr::include_graphics("source_plot.jpg")
-
-knitr::include_graphics("source_pdb.jpg")
-
-```
+  
