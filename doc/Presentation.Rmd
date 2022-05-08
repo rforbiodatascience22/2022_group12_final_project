@@ -60,7 +60,10 @@ pdb_entries_aug %>%
 
 ## Results: Further Analysis III {.smaller}
 
-Linear model
+- Linear regression using logarithmic y scale
+- exponential growth phase (late 80's until 2000's)
+
+![Linear regression of entries over time](../results/entries_over_time.png){width=49%} ![Observed exponential growth phase](../results/entries_over_time_exp.png){width=49%}
 
 ## Discussion 
 
