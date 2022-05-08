@@ -12,11 +12,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Intoduction {.smaller}
 
-- what we want to do?
-- why do we want to do it?
-- show the problem (some example plots)
+The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
 
-![](example_pdb_piechart.png){width=65%}
+- An open archive of experimental 3D structures
+- Estimated 1 Million unique users annually
+
+![PDB Statitics - an example of data distribution found on https://www.rcsb.org/stats/](../tmp/release_date_plot.jpg){width=50%} 
 
 ## Materials and Methods {.smaller}
 
@@ -25,15 +26,15 @@ From raw data to visualizations
 
 ## Results: Bar plots I {.smaller}
 
-Source organism
+![Most common source organism](../results/source.png){width=70%}
 
 ## Results: Bar plots II {.smaller}
 
-Superkingdom
+![Most common superkingom](../results/pdb_taxonomy.png){width=70%}
 
 ## Results: Bar plots III {.smaller}
 
-SCOP class
+![Data distribution by SCOP class](../results/scop-class_plot.png){width=70%}
 
 ## Results: Further Analysis I {.smaller}
 
