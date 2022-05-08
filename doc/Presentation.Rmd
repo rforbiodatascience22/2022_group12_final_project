@@ -150,4 +150,6 @@ pdb_entries_aug %>%
 - Online community
 
 ### References
-Pie charts: https://www.rcsb.org/stats/
+- Pie charts: https://www.rcsb.org/stats/
+- RCSB PDB: https://www.rcsb.org/news/feature/61b8e5e869569d045d35a9a3
+- Alphafold: https://oecd.ai/fr/wonk/deepminds-alphafold-a-solution-to-challenge-of-protein-folding
