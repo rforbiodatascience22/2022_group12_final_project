@@ -14,6 +14,11 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+
+## Intoduction {.smaller}
+
+![AlphaFold](../doc/alphafold.gif){width=90%}
+
 ## Intoduction {.smaller}
 
 The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
@@ -24,12 +29,6 @@ The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RC
 <div class="centered">
 ![PDB Statitics - an example of data distribution found on https://www.rcsb.org/stats/](img/release_date_plot.jpg){width=50%}
 </div>
-
-
-## Intoduction {.smaller}
-
-![AlphaFold](../doc/alphafold.gif){width=90%}
-
 
 ## Materials and Methods {.smaller}
 
