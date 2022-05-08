@@ -11,9 +11,6 @@ pdb_entries_aug <- read_tsv(file = "data/03_dat_augment.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-#######################
-## TAXONOMY ANALYSIS ##
-#######################
 
 # Select superkingdom and molecule type columns, then tidy
 taxonomy_df <- pdb_entries_aug %>% 
