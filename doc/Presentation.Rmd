@@ -1,7 +1,11 @@
 ---
 title: "Improving PDB metadata visualizations"
 subtitle: "Group 12"
-author: "Deeptha S., Eric B., Jonathan F., Laura M."
+author: 
+  - Deeptha Sri - s210230
+  - Eric Bautista - s212514
+  - Jonathan Funk - s212697
+  - Laura Machado - s212775
 date: '09/05/2022'
 output: ioslides_presentation
 ---
@@ -95,9 +99,3 @@ pdb_entries_aug %>%
 
 ### References
 Pie charts: https://www.rcsb.org/stats/
-
-### Group members
-- Deeptha Sri (s210230)
-- Eric Bautista (s212514)
-- Jonathan Funk (s212697)
-- Laura Machado (s212775)
