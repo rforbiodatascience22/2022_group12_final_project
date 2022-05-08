@@ -87,7 +87,7 @@ pdb_taxonomy %>%
 
 ggsave(filename = "results/pdb_taxonomy.png",
        height = 3,
-       width = 5)
+       width = 6)
 
 ### Plot Molecule Type Distribution By Superkingdom
 pdb_taxa_mol %>% 
@@ -147,17 +147,15 @@ pdb_taxa_scop %>%
                                "α/β",
                                "α+β",
                                "small")) +
-  theme_linedraw() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) +
+  theme_linedraw(base_size = 16) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "SCOP Classification Distribution By Superkingdom",
        x = "",
        y = "Number of entries")
 
 ggsave(filename = "results/pdb_taxa_scop.png",
-       height = 5,
-       width = 9)
+       height = 6,
+       width = 11)
 
 
 ### Number of entries to the RCSB PDB over time
