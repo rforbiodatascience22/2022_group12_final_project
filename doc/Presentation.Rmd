@@ -94,7 +94,7 @@ pdb_entries_aug %>%
 - Online community
 
 ### References
-<copy_here_piechart_URL>
+Pie charts: https://www.rcsb.org/stats/
 
 ### Group members
 - Deeptha Sri (s210230)
