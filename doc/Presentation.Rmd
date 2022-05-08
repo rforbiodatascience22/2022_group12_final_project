@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ![](../doc/alphafold.gif){width=90%}
 </div>
 
-## Intoduction {.smaller}
+## Introduction {.smaller}
 
 The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RCSB-PDB) 
 
