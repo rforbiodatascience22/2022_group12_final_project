@@ -94,10 +94,10 @@ pdb_entries_aug %>%
 - Online community
 
 ### References
-Source of pie charts: <copy_here_URL>
+<copy_here_piechart_URL>
 
-### Group members: 
-- Deeptha S.(stnumb)
-- Eric B.(stnumb)
-- Jonathan F.(stnumb)
-- Laura M.(stnumb)
+### Group members
+- Deeptha Sri (s210230)
+- Eric Bautista (s212514)
+- Jonathan Funk (s212697)
+- Laura Machado (s212775)
