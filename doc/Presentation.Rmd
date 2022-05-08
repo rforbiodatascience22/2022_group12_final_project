@@ -69,7 +69,7 @@ pdb_taxa_mol <- taxonomy_df %>%
 ```{r Results_II, echo = TRUE, eval = FALSE}
 pdb_entries_aug %>% 
   select(IDCODE, RESOLUTION, `EXPERIMENT TYPE`) %>% 
-  filter(RESOLUTION < 5)
+  filter(`EXPERIMENT TYPE` %in% exp_type_levels)
 ```
 
 ![](../results/resolution_boxplot.png){width=99%} 
@@ -89,6 +89,8 @@ pdb_entries_aug %>%
 2. Database updates compromise reproducibility
 
 3. Greatest challenge: combining files from different sources
+
+4. Further analysis to account for redundancy.
 
 <div class="centered">
 ![](img/logo_pdb.png){width=30%}
