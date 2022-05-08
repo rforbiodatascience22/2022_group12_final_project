@@ -47,10 +47,6 @@ pdb_taxa_scop <- taxonomy_df %>%
 
 # Visualise data ----------------------------------------------------------
 
-######################
-### TAXONOMY PLOTS ###
-######################
-
 # Store superkingdom levels to use in plots
 taxa_levels = c("Eukaryota", 
                 "Bacteria", 
@@ -70,7 +66,7 @@ scop_levels <- c("All alpha proteins",
                  "Alpha and beta proteins (a+b)",
                  "Small proteins")
 
-# Plot PDB Data Distribution By Superkingdom
+### Plot PDB Data Distribution By Superkingdom
 pdb_taxonomy %>% 
   ggplot(mapping = aes(x = factor(SUPERKINGDOM, 
                                   level = taxa_levels),
@@ -93,7 +89,7 @@ ggsave(filename = "results/pdb_taxonomy.png",
        height = 3,
        width = 5)
 
-# Plot Molecule Type Distribution By Superkingdom
+### Plot Molecule Type Distribution By Superkingdom
 pdb_taxa_mol %>% 
   ggplot(mapping = aes(x = factor(`MOLECULE TYPE`,
                                   level = mol_levels),
@@ -126,7 +122,7 @@ ggsave(filename = "results/pdb_taxa_mol.png",
        height = 5,
        width = 7)
 
-# Plot SCOP Classification Distribution By Superkingdom - Bar
+### Plot SCOP Classification Distribution By Superkingdom - Bar
 pdb_taxa_scop %>% 
   ggplot(mapping = aes(x = factor(SCOP_NAME,
                                   level = scop_levels),
@@ -164,7 +160,7 @@ ggsave(filename = "results/pdb_taxa_scop.png",
        width = 9)
 
 
-# over the entire time
+### Number of entries to the RCSB PDB over time
 pdb_entries_aug %>%
   group_by(YEAR) %>%
   drop_na() %>%
@@ -175,7 +171,7 @@ pdb_entries_aug %>%
   geom_smooth(mapping = aes(x = YEAR, 
                             y = log(n)), method=lm) +
   theme_linedraw()  +
-  labs(title = "Number of entries to the RCSB over time",
+  labs(title = "Number of entries to the RCSB PDB over time",
        x = "Year",
        y = "log(number of entries)")
 
@@ -183,7 +179,7 @@ ggsave(filename = "results/entries_over_time.png",
        width = 8,
        height = 5) 
 
-# exponential phase
+### Exponential growth phase of entries added to RCSB PDB
 pdb_entries_aug %>%
   group_by(YEAR) %>%
   drop_na() %>%
@@ -196,7 +192,7 @@ pdb_entries_aug %>%
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
   theme_linedraw() +
-  labs(title = "Exponential growth phase of entries added to RCSB",
+  labs(title = "Exponential growth phase of entries added to RCSB PDB",
        x = "Year",
        y = "log(number of entries)")
 
@@ -204,7 +200,7 @@ ggsave(filename = "results/entries_over_time_exp.png",
        width = 8,
        height = 5) 
 
-# Bar plot of most common enzyme classes in the RCSB
+### Most common enzyme classes in the RCSB PDB
 pdb_entries_aug %>% 
   group_by(HEADER) %>% 
   drop_na() %>%
@@ -219,7 +215,7 @@ pdb_entries_aug %>%
   theme_linedraw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_brewer(palette = "Set1") +
-  labs(title = "Most common enzyme classes in the RCSB",
+  labs(title = "Most common enzyme classes in the RCSB PDB",
        x = "Enzyme class",
        y = "Number of entries",
        fill = "Enzyme class")
@@ -228,7 +224,7 @@ ggsave(filename = "results/enzyme_classes.png",
        width = 6,
        height = 6) 
 
-#Plot 1 - Entity type bar plot
+### Molecule type bar plot
 pdb_entries_aug %>%
   filter(`MOLECULE TYPE` != "other") %>%
   group_by(`MOLECULE TYPE`)  %>% 
@@ -258,7 +254,7 @@ ggsave(filename = "results/entity_type_plot.png",
        height = 4)
 
 
-#Plot2 - Distribution of structures based on entry year
+### Distribution of structures based on entry year
 pdb_entries_aug %>% 
   group_by(YEAR) %>% 
   drop_na(YEAR) %>% 
@@ -276,7 +272,7 @@ ggsave(filename = "results/entries_per_year.png",
        height = 4)
 
 
-#Plot3 - Distribution of structures based on Experiment Type
+### Distribution of structures based on Experiment Type
 pdb_entries_aug %>% 
   group_by(`EXPERIMENT TYPE`) %>% 
   drop_na(`EXPERIMENT TYPE`) %>%  
@@ -299,7 +295,7 @@ ggsave(filename = "results/experiment_type.png",
        width = 6,
        height = 4)
 
-#Plot4 - Distribution of entries based on source organism
+### Distribution of entries based on source organism
 pdb_entries_aug %>% 
   mutate(SOURCE = str_replace_all(SOURCE, "\\;[\\w\\s]+", ""),  
          SOURCE = str_match(SOURCE, "^[\\w\\s]+")[,1]) %>%  
@@ -324,10 +320,7 @@ ggsave(filename = "results/source.png",
        width = 8,
        height = 5)
 
-######################
-###### SCOP PLOT #####
-######################
-
+### Distribution of SCOP classes in PDB entries
 scop_df <- pdb_entries_aug %>% 
   filter(`MOLECULE TYPE` != "nuc") %>% 
   select(IDCODE, `MOLECULE TYPE`, SCOP_NAME) %>% 
@@ -366,20 +359,36 @@ ggsave(filename = "results/scop-class_plot.png",
        height = 3,
        width = 6)
 
-# Boxplot resolution by experiment type
+# Top experiment types
+exp_type_levels <- pdb_entries_aug %>% 
+  select(IDCODE, `EXPERIMENT TYPE`, RESOLUTION) %>% 
+  group_by(`EXPERIMENT TYPE`) %>% 
+  drop_na(`EXPERIMENT TYPE`, RESOLUTION) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n)) %>% 
+  top_n(9) %>% 
+  select(`EXPERIMENT TYPE`) %>% 
+  pull(`EXPERIMENT TYPE`)
+
+### Resolution stratified by Experiment Type
 pdb_entries_aug %>% 
   select(IDCODE, RESOLUTION, `EXPERIMENT TYPE`) %>% 
-  filter(RESOLUTION < 5) %>% 
-  drop_na(`EXPERIMENT TYPE`) %>% 
-  ggplot(mapping = aes(x = `EXPERIMENT TYPE`,
+  filter(`EXPERIMENT TYPE` %in% exp_type_levels) %>% 
+  drop_na(`EXPERIMENT TYPE`, RESOLUTION) %>% 
+  ggplot(mapping = aes(x = factor(`EXPERIMENT TYPE`,
+                                  levels = exp_type_levels),
                        y = RESOLUTION,
                        fill = `EXPERIMENT TYPE`)) +
   geom_boxplot(alpha = 0.6) +
-  scale_fill_brewer(palette = "Set1") +
+  scale_x_discrete(labels = exp_type_levels) +
+  scale_fill_brewer(palette = "Set1",
+                    breaks = exp_type_levels,
+                    labels = exp_type_levels) +
   theme_linedraw() +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         plot.title = element_text(hjust = 0.5)) +
+  ylim(0,35) +
   labs(x = "Experiment type",
        y = "Resolution (Å)",
        title = "Resolution stratified by Experiment Type*",
