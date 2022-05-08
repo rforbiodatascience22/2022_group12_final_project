@@ -170,7 +170,7 @@ pdb_entries_aug %>%
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, 
                             y = log(n)), method=lm) +
-  theme_linedraw()  +
+  theme_linedraw(base_size = 16)  +
   labs(title = "Number of entries to the RCSB PDB over time",
        x = "Year",
        y = "log(number of entries)")
@@ -191,7 +191,7 @@ pdb_entries_aug %>%
                        y = log(n))) +
   geom_point() +
   geom_smooth(mapping = aes(x = YEAR, y = log(n)), method=lm) +
-  theme_linedraw() +
+  theme_linedraw(base_size = 16) +
   labs(title = "Exponential growth phase of entries added to RCSB PDB",
        x = "Year",
        y = "log(number of entries)")
