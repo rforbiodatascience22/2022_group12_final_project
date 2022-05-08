@@ -74,11 +74,17 @@ pdb_entries_aug %>%
 
 ## Discussion 
 
-- Just a snapshot
+1. Successfully improved the PDB metadata visualizations
 
-- DB latest version
+2. Database updates compromise reproducibility
 
-- Choose join type wisely
+3. Greatest challenge: combining files from different sources
+
+<div class="centered">
+![](img/logo_pdb.png){width=30%}
+![](img/logo_ncbi.png){width=15%}
+![](img/logo_scop.png){width=30%}
+</div>
 
 ## Acknowledgments {.smaller}
 
