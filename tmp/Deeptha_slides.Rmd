@@ -25,7 +25,7 @@ The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RC
 
 ## Re-creation of PDB Data Statitics
 
-![Most common source organism](../results/source.png){width=50%}![Distribution of entries by source organism](../tmp/source_pdb.jpg){width=50%}
+![Most common source organism](../results/source.png){width=51%}![Distribution of entries by source organism](../tmp/source_pdb.jpg){width=49%}
 
 
 ## Re-creation of PDB Data Statitics
