@@ -30,7 +30,7 @@ The Research Collaboratory for Structural Bioinformatics - Protein Data Bank (RC
 - Estimated 1 Million unique users annually
 
 <div class="centered">
-![PDB Statitics - an example of data distribution found on https://www.rcsb.org/stats/](img/release_date_plot.jpg){width=50%}
+![](img/release_date_plot.jpg){width=50%}
 </div>
 
 ## Materials and Methods {.smaller}
