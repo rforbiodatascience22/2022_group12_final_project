@@ -45,12 +45,19 @@ some of the categories which were chosen by creators of the plots were changed
 during this project based on our preferences:
 
 ![](results/source.png){width=45%}
+
 ![](results/entity_type_plot.png){width=45%}
+
 ![](results/enzyme_classes.png){width=45%}
+
 ![](results/experiment_type.png){width=45%}
+
 ![](results/pdb_taxonomy.png){width=45%}
+
 ![](results/scop-class_plot.png){width=45%}
+
 ![](results/entries_over_time.png){width=40%}
+
 ![](results/entries_over_time_exp.png){width=40%}
 
 
