@@ -86,8 +86,18 @@ pdb_entries_aug %>%
 ![](img/logo_scop.png){width=30%}
 </div>
 
-## Acknowledgments {.smaller}
+## Final regards {.smaller}
+
+### Acknowledgments
 
 - TAs
-
 - Online community
+
+### References
+Source of pie charts: <copy_here_URL>
+
+### Group members: 
+- Deeptha S.(stnumb)
+- Eric B.(stnumb)
+- Jonathan F.(stnumb)
+- Laura M.(stnumb)
