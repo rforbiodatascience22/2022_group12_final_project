@@ -90,9 +90,9 @@ pdb_entries_aug %>%
 ![](img/logo_scop.png){width=30%}
 </div>
 
-## Final regards {.smaller}
+## Acknowledgements {.smaller}
 
-### Acknowledgments
+### Acknowledgements
 
 - TAs
 - Online community
