@@ -219,7 +219,7 @@ ggsave(filename = "results/enzyme_classes.png",
        width = 6,
        height = 6) 
 
-### Molecule type bar plot
+### Most common molecule type in RCSB PDB
 pdb_entries_aug %>%
   filter(`MOLECULE TYPE` != "other") %>%
   group_by(`MOLECULE TYPE`)  %>% 
@@ -267,7 +267,7 @@ ggsave(filename = "results/entries_per_year.png",
        height = 4)
 
 
-### Distribution of structures based on Experiment Type
+### Most common experiment type in RCSB PDB
 pdb_entries_aug %>% 
   group_by(`EXPERIMENT TYPE`) %>% 
   drop_na(`EXPERIMENT TYPE`) %>%  
